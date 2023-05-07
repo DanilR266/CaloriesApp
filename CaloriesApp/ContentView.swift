@@ -7,18 +7,21 @@
 //
 
 import SwiftUI
+import Firebase
 
 
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, bgfr!")
+        ZStack {
+            Color.backgroundColor.ignoresSafeArea()
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text("Hello, bgfr!")
+            }
         }
-        .padding()
     }
 }
 

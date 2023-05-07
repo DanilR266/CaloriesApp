@@ -20,15 +20,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct CaloriesAppApp: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-          AuthView()
-      }
+    // register app delegate for Firebase setup
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @ObservedObject var auth = Authentication()
+    var body: some Scene {
+        WindowGroup {
+            NavigationView {
+                if auth.authenticated {
+                    AuthView()
+                } else { MainScreen() }
+            }
+        }
     }
-  }
 }

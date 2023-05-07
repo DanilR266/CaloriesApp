@@ -18,6 +18,12 @@
 		7E702DC929F3BD2A005FD4AB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7E702DC829F3BD2A005FD4AB /* FirebaseFirestore */; };
 		7E702DCF29F3BE92005FD4AB /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E702DCE29F3BE92005FD4AB /* AuthView.swift */; };
 		7E702DD129F3BF64005FD4AB /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E702DD029F3BF64005FD4AB /* AuthViewModel.swift */; };
+		7E801A9729F9550A00AAB764 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E801A9629F9550A00AAB764 /* MainView.swift */; };
+		7E801A9A29F958BD00AAB764 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 7E801A9929F958BD00AAB764 /* SlidingTabView */; };
+		7E858CA929FA82A40060A41E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E858CA829FA82A40060A41E /* MainViewModel.swift */; };
+		7EA24AB729F7E06C00B2B65B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24AB629F7E06C00B2B65B /* AuthModel.swift */; };
+		7EA24AB929F8566A00B2B65B /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24AB829F8566A00B2B65B /* MainScreen.swift */; };
+		7EA24ABB29F856DD00B2B65B /* StrokeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24ABA29F856DD00B2B65B /* StrokeTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +35,11 @@
 		7E702DBF29F3BCB3005FD4AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7E702DCE29F3BE92005FD4AB /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		7E702DD029F3BF64005FD4AB /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		7E801A9629F9550A00AAB764 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		7E858CA829FA82A40060A41E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		7EA24AB629F7E06C00B2B65B /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
+		7EA24AB829F8566A00B2B65B /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		7EA24ABA29F856DD00B2B65B /* StrokeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E702DC729F3BD2A005FD4AB /* FirebaseDatabase in Frameworks */,
+				7E801A9A29F958BD00AAB764 /* SlidingTabView in Frameworks */,
 				7E702DC929F3BD2A005FD4AB /* FirebaseFirestore in Frameworks */,
 				7E702DC329F3BD2A005FD4AB /* FirebaseAnalytics in Frameworks */,
 				7E702DC529F3BD2A005FD4AB /* FirebaseAuth in Frameworks */,
@@ -71,6 +83,10 @@
 				7E702DBF29F3BCB3005FD4AB /* GoogleService-Info.plist */,
 				7E68D0B229F1BDEF00D0EE02 /* Assets.xcassets */,
 				7E68D0B429F1BDEF00D0EE02 /* Preview Content */,
+				7EA24AB829F8566A00B2B65B /* MainScreen.swift */,
+				7EA24ABA29F856DD00B2B65B /* StrokeTextView.swift */,
+				7E801A9629F9550A00AAB764 /* MainView.swift */,
+				7E858CA829FA82A40060A41E /* MainViewModel.swift */,
 			);
 			path = CaloriesApp;
 			sourceTree = "<group>";
@@ -96,6 +112,7 @@
 		7E702DCB29F3BE5D005FD4AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7EA24AB629F7E06C00B2B65B /* AuthModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +154,7 @@
 				7E702DC429F3BD2A005FD4AB /* FirebaseAuth */,
 				7E702DC629F3BD2A005FD4AB /* FirebaseDatabase */,
 				7E702DC829F3BD2A005FD4AB /* FirebaseFirestore */,
+				7E801A9929F958BD00AAB764 /* SlidingTabView */,
 			);
 			productName = CaloriesApp;
 			productReference = 7E68D0AB29F1BDEE00D0EE02 /* CaloriesApp.app */;
@@ -168,6 +186,7 @@
 			mainGroup = 7E68D0A229F1BDEE00D0EE02;
 			packageReferences = (
 				7E702DC129F3BD2A005FD4AB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7E801A9829F958BD00AAB764 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 			);
 			productRefGroup = 7E68D0AC29F1BDEE00D0EE02 /* Products */;
 			projectDirPath = "";
@@ -196,10 +215,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EA24AB929F8566A00B2B65B /* MainScreen.swift in Sources */,
+				7E801A9729F9550A00AAB764 /* MainView.swift in Sources */,
 				7E702DD129F3BF64005FD4AB /* AuthViewModel.swift in Sources */,
 				7E68D0B129F1BDEE00D0EE02 /* ContentView.swift in Sources */,
 				7E68D0AF29F1BDEE00D0EE02 /* CaloriesAppApp.swift in Sources */,
 				7E702DCF29F3BE92005FD4AB /* AuthView.swift in Sources */,
+				7EA24ABB29F856DD00B2B65B /* StrokeTextView.swift in Sources */,
+				7EA24AB729F7E06C00B2B65B /* AuthModel.swift in Sources */,
+				7E858CA929FA82A40060A41E /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +436,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		7E801A9829F958BD00AAB764 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -434,6 +466,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E702DC129F3BD2A005FD4AB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		7E801A9929F958BD00AAB764 /* SlidingTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E801A9829F958BD00AAB764 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
+			productName = SlidingTabView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
