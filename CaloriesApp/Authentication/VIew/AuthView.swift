@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct AuthView: View {
-    @State var userEmail: String = ""
-    @State var userPassword: String = ""
-    @State var userName: String = ""
-    @State var regBool: Bool = false
-    @State private var isTextFieldFocused: Bool = false
-    var viewModel = AuthViewModel()
+    @ObservedObject private var keyboardResponder = KeyboardResponder()
+    @ObservedObject var viewModel = Authentication()
     var body: some View {
         ZStack {
             Color.backgroundColor.ignoresSafeArea()
@@ -21,16 +17,17 @@ struct AuthView: View {
                 Image("logo-2")
                     .resizable()
                     .frame(width: 212, height: 83)
-                    .offset(y: regBool ? 70 : 0)
-                    .animation(.spring(), value: regBool)
+                    .offset(y: viewModel.regBool ? 70 : 0)
+                    .animation(.spring(), value: viewModel.regBool)
                     .padding(.top, 40)
+                    .opacity(keyboardResponder.keyboardIsShowing ? 0 : 1)
                 VStack {
                     VStack(alignment: .leading, spacing: 13) {
                         Text("Логин")
                             .font(.system(size: 36, weight: .regular))
                             .padding(.leading, 44)
                         VStack {
-                            TextField("Ваш логин", text: $userEmail)
+                            TextField("Ваш логин", text: $viewModel.userEmail)
                                 .foregroundColor(.black)
                                 .padding(.leading, 44)
                                 .padding(.trailing, 44)
@@ -46,7 +43,7 @@ struct AuthView: View {
                             .font(.system(size: 36, weight: .regular))
                             .padding(.leading, 44)
                         VStack {
-                            SecureField("Ваш пароль", text: $userPassword)
+                            SecureField("Ваш пароль", text: $viewModel.userPassword)
                                 .padding(.leading, 44)
                                 .padding(.trailing, 44)
                             
@@ -57,13 +54,13 @@ struct AuthView: View {
                                 .padding(.trailing, 44)
                         }
                     }
-                    if regBool {
+                    if viewModel.regBool {
                         VStack(alignment: .leading, spacing: 13) {
                             Text("Имя")
                                 .font(.system(size: 36, weight: .regular))
                                 .padding(.leading, 44)
                             VStack {
-                                TextField("Ваше имя", text: $userName)
+                                TextField("Ваше имя", text: $viewModel.name)
                                     .padding(.leading, 44)
                                     .padding(.trailing, 44)
                                 Rectangle()
@@ -76,13 +73,15 @@ struct AuthView: View {
                         HStack(spacing: 60) {
                             Button {
                                 DispatchQueue.main.async {
-                                    viewModel.registrationFB(email: userEmail, password: userPassword, name: userName)
+                                    viewModel.registration(email: viewModel.userEmail, password: viewModel.userPassword, name: viewModel.name)
+                                    viewModel.userPassword = ""
                                 }
-                                regBool = false
+
+                                viewModel.regBool = false
                             } label: {
                                 ZStack {
                                     Circle()
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.regButton)
                                         .frame(width: 59, height: 59)
                                         .shadow(radius: 3, y: 4)
                                     Text("Регистрация")
@@ -93,11 +92,11 @@ struct AuthView: View {
                                 }
                             }
                             Button {
-                                regBool = false
+                                viewModel.regBool = false
                             } label: {
                                 ZStack {
                                     Circle()
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.regButton)
                                         .frame(width: 59, height: 59)
                                         .shadow(radius: 3, y: 4)
                                     Text("Вход")
@@ -110,15 +109,16 @@ struct AuthView: View {
                         }.padding(.top, 40).padding(.trailing, 100)
                     }
                 }
-                .offset(y: regBool ? 70 : 0)
-                .animation(.spring(), value: regBool)
+                .offset(y: viewModel.regBool ? 70 : 0)
+                .animation(.spring(), value: viewModel.regBool)
                 HStack(spacing: 40) {
                     Button {
-                        AuthViewModel().loginFB(email: userEmail, password: userPassword)
+                        viewModel.login(email: viewModel.userEmail, password: viewModel.userPassword)
+                        
                     } label: {
                         ZStack {
                             Circle()
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.regButton)
                                 .frame(width: 59)
                                 .shadow(radius: 3, y: 4)
                             Text("Войти")
@@ -129,11 +129,11 @@ struct AuthView: View {
                         }
                     }
                     Button {
-                        regBool = true
+                        viewModel.regBool = true
                     } label: {
                         ZStack {
                             Circle()
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.regButton)
                                 .frame(width: 59)
                                 .shadow(radius: 3, y: 4)
                             Text("Регистрация")
@@ -146,8 +146,8 @@ struct AuthView: View {
                     }
                 }.padding(.leading, -70).padding(.top, 30)
                     
-                    .offset(y: regBool ? 500 : 0)
-                    .animation(.spring(), value: regBool)
+                    .offset(y: viewModel.regBool ? 500 : 0)
+                    .animation(.spring(), value: viewModel.regBool)
                 ZStack {
                     Image("Vector1-2")
                         .resizable()
@@ -158,8 +158,8 @@ struct AuthView: View {
                 }
                 .padding(.top, 50)
                 .ignoresSafeArea()
-                .offset(y: regBool ? 500 : 0)
-                .animation(.spring(), value: regBool)
+                .offset(y: viewModel.regBool ? 500 : 0)
+                .animation(.spring(), value: viewModel.regBool)
             }
         }
     }

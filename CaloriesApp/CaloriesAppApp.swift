@@ -26,7 +26,7 @@ struct CaloriesAppApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                if auth.authenticated {
+                if !auth.authenticated {
                     AuthView()
                 } else { MainScreen() }
             }
