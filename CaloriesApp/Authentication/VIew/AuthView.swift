@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AuthView: View {
     @ObservedObject private var keyboardResponder = KeyboardResponder()
-    @ObservedObject var viewModel = Authentication()
+    @ObservedObject var viewModel: Authentication
     var body: some View {
         ZStack {
             Color.backgroundColor.ignoresSafeArea()
@@ -74,7 +74,7 @@ struct AuthView: View {
                             Button {
                                 DispatchQueue.main.async {
                                     viewModel.registration(email: viewModel.userEmail, password: viewModel.userPassword, name: viewModel.name)
-                                    viewModel.userPassword = ""
+//                                    viewModel.userPassword = ""
                                 }
 
                                 viewModel.regBool = false
@@ -113,7 +113,7 @@ struct AuthView: View {
                 .animation(.spring(), value: viewModel.regBool)
                 HStack(spacing: 40) {
                     Button {
-                        viewModel.login(email: viewModel.userEmail, password: viewModel.userPassword)
+                        viewModel.login()
                         
                     } label: {
                         ZStack {
@@ -148,6 +148,10 @@ struct AuthView: View {
                     
                     .offset(y: viewModel.regBool ? 500 : 0)
                     .animation(.spring(), value: viewModel.regBool)
+                Text(viewModel.errorRegistration ?? "").offset(y: viewModel.regBool ? 500 : 0)
+                    .animation(.spring(), value: viewModel.regBool)
+                Text(viewModel.errorAuth ?? "").offset(y: viewModel.regBool ? 500 : 0)
+                    .animation(.spring(), value: viewModel.regBool)
                 ZStack {
                     Image("Vector1-2")
                         .resizable()
@@ -177,7 +181,7 @@ struct FieldView: View {
 
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthView()
+        AuthView(viewModel: Authentication())
     }
 }
 

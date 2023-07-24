@@ -36,6 +36,7 @@ struct CaloriesFrontSide: View {
                     shared.calories += Int(calories) ?? 0
                     calories = ""
                     keyboardResponder.hideKeyboard()
+                    shared.setCal(str: food)
                 } label: {
                     ZStack {
                         Rectangle()
@@ -51,6 +52,7 @@ struct CaloriesFrontSide: View {
                     withAnimation {
                         shared.flipCard()
                     }
+                    shared.getStored()
                 } label: {
                     ZStack {
                         Rectangle()

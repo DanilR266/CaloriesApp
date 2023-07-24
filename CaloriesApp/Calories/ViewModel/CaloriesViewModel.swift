@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class CaloriesViewModel: ObservableObject {
-    
+    var fireStore = Authentication()
     @AppStorage("calories") var calories: Int = 0 {
         willSet { objectWillChange.send() }
     }
@@ -56,6 +56,13 @@ class CaloriesViewModel: ObservableObject {
     
     func fastCahngeCalories(fastChange: Int) {
         self.calories = self.calories + fastChange >= 0  ? self.calories + fastChange : self.calories
+    }
+    
+    func setCal(str: String) {
+        fireStore.setData(str: str)
+    }
+    func getStored() {
+        fireStore.getStoredData()
     }
     
 }

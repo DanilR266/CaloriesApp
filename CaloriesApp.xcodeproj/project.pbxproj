@@ -16,6 +16,8 @@
 		7E39BBC82A50631800E017ED /* CaloriesBackSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC72A50631800E017ED /* CaloriesBackSide.swift */; };
 		7E4BD96C2A6E3C5000AB045E /* CaloriesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD96B2A6E3C5000AB045E /* CaloriesAppTests.swift */; };
 		7E4BD9782A6E3E5400AB045E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7E4BD9772A6E3E5400AB045E /* FirebaseAuth */; };
+		7E4BD97E2A6E5EF100AB045E /* ViewQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD97D2A6E5EF100AB045E /* ViewQuestions.swift */; };
+		7E4BD9802A6E70D000AB045E /* AuthViewMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD97F2A6E70D000AB045E /* AuthViewMain.swift */; };
 		7E6176222A33325B00FEB4DD /* ScaleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6176212A33325B00FEB4DD /* ScaleScreen.swift */; };
 		7E68D0AF29F1BDEE00D0EE02 /* CaloriesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E68D0AE29F1BDEE00D0EE02 /* CaloriesAppApp.swift */; };
 		7E68D0B129F1BDEE00D0EE02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E68D0B029F1BDEE00D0EE02 /* ContentView.swift */; };
@@ -68,6 +70,8 @@
 		7E4BD9692A6E3C5000AB045E /* CaloriesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaloriesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E4BD96B2A6E3C5000AB045E /* CaloriesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesAppTests.swift; sourceTree = "<group>"; };
 		7E4BD9732A6E3D5C00AB045E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7E4BD97D2A6E5EF100AB045E /* ViewQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewQuestions.swift; sourceTree = "<group>"; };
+		7E4BD97F2A6E70D000AB045E /* AuthViewMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewMain.swift; sourceTree = "<group>"; };
 		7E6176212A33325B00FEB4DD /* ScaleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleScreen.swift; sourceTree = "<group>"; };
 		7E68D0AB29F1BDEE00D0EE02 /* CaloriesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaloriesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E68D0AE29F1BDEE00D0EE02 /* CaloriesAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesAppApp.swift; sourceTree = "<group>"; };
@@ -145,6 +149,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7E4BD9792A6E4FB200AB045E /* Water */ = {
+			isa = PBXGroup;
+			children = (
+				7E4BD97C2A6E4FEF00AB045E /* ModelWater */,
+				7E4BD97B2A6E4FE400AB045E /* ViewModelWater */,
+				7E4BD97A2A6E4FD400AB045E /* ViewWater */,
+			);
+			path = Water;
+			sourceTree = "<group>";
+		};
+		7E4BD97A2A6E4FD400AB045E /* ViewWater */ = {
+			isa = PBXGroup;
+			children = (
+				7E6C98422A67C9CB00480C64 /* WaterView.swift */,
+			);
+			path = ViewWater;
+			sourceTree = "<group>";
+		};
+		7E4BD97B2A6E4FE400AB045E /* ViewModelWater */ = {
+			isa = PBXGroup;
+			children = (
+				7E6C98442A67CA8E00480C64 /* WaterViewModel.swift */,
+			);
+			path = ViewModelWater;
+			sourceTree = "<group>";
+		};
+		7E4BD97C2A6E4FEF00AB045E /* ModelWater */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelWater;
+			sourceTree = "<group>";
+		};
 		7E68D0A229F1BDEE00D0EE02 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +213,7 @@
 				7E68D0B029F1BDEE00D0EE02 /* ContentView.swift */,
 				7E68D0B429F1BDEF00D0EE02 /* Preview Content */,
 				7EA24AB829F8566A00B2B65B /* MainScreen.swift */,
+				7E4BD9792A6E4FB200AB045E /* Water */,
 				7E39BBBE2A4D8FEB00E017ED /* Calories */,
 				7EB436E82A30EF570052AA01 /* Weight */,
 				7EB436E72A30EEF10052AA01 /* SubViews */,
@@ -184,8 +222,6 @@
 				7EE229312A55492F00C554CE /* Color+Extension.swift */,
 				7E1AB9402A626A370005E819 /* KeyboardDetect.swift */,
 				7E6C98402A6705A300480C64 /* PathTest.swift */,
-				7E6C98422A67C9CB00480C64 /* WaterView.swift */,
-				7E6C98442A67CA8E00480C64 /* WaterViewModel.swift */,
 			);
 			path = CaloriesApp;
 			sourceTree = "<group>";
@@ -219,6 +255,8 @@
 		7E702DCC29F3BE69005FD4AB /* VIew */ = {
 			isa = PBXGroup;
 			children = (
+				7E4BD97F2A6E70D000AB045E /* AuthViewMain.swift */,
+				7E4BD97D2A6E5EF100AB045E /* ViewQuestions.swift */,
 				7E702DCE29F3BE92005FD4AB /* AuthView.swift */,
 			);
 			path = VIew;
@@ -438,6 +476,7 @@
 				7E39BBC22A4D902100E017ED /* CaloriesViewModel.swift in Sources */,
 				7EE229302A5416DE00C554CE /* SettingsMain.swift in Sources */,
 				7E704C182A56AD9B009F37AC /* SettingsProfile.swift in Sources */,
+				7E4BD97E2A6E5EF100AB045E /* ViewQuestions.swift in Sources */,
 				7E39BBC42A4D902A00E017ED /* CaloriesModel.swift in Sources */,
 				7E6C98432A67C9CB00480C64 /* WaterView.swift in Sources */,
 				7E39BBC02A4D900D00E017ED /* CaloriesView.swift in Sources */,
@@ -461,6 +500,7 @@
 				7EA24ABB29F856DD00B2B65B /* StrokeTextView.swift in Sources */,
 				7EA24AB729F7E06C00B2B65B /* AuthModel.swift in Sources */,
 				7E704C1A2A56AE8B009F37AC /* Model.swift in Sources */,
+				7E4BD9802A6E70D000AB045E /* AuthViewMain.swift in Sources */,
 				7E6176222A33325B00FEB4DD /* ScaleScreen.swift in Sources */,
 				7EB436ED2A30EFB90052AA01 /* ModelWeight.swift in Sources */,
 			);
