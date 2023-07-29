@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct Weight: View {
-    private var shared = WeightViewModel()
+public struct Weight: View {
+    @StateObject var shared = WeightViewModel()
+    
     var size = Size()
-    @State var text: String = String(WeightViewModel().getWeigth())
-    var body: some View {
+//    @State var text: String = String(WeightViewModel().getWeigth())
+    public var body: some View {
         ZStack {
             Rectangle()
                 .frame(width: size.scaleWidth(300), height: size.scaleHeight(505))
@@ -25,7 +26,7 @@ struct Weight: View {
                     .multilineTextAlignment(.center)
                 HStack(spacing: 27) {
                     Button {
-                        self.text = shared.buttonUpDown(plus: false, text: text)
+                        self.shared.weightStore = shared.buttonUpDown(plus: false, text: self.shared.weightStore)
                     } label: {
                         ButtonPlus(size: size, text: "-")
                     }
@@ -34,20 +35,20 @@ struct Weight: View {
                             .strokeBorder(Color.buttonColor, lineWidth: 2)
                             .frame(width: size.scaleWidth(91), height: size.scaleWidth(91))
                             .foregroundColor(.fieldWeight)
-                        TextField("", text: $text)
-                            .font(.system(size: text.count > 5 ? 25 : 30, weight: .bold))
+                        TextField("", text: self.$shared.weightStore)
+                            .font(.system(size: self.shared.weightStore.count > 5 ? 25 : 30, weight: .bold))
                             .foregroundColor(Color.buttonColor)
                             .frame(width: size.scaleWidth(91), height: size.scaleWidth(91))
                             .multilineTextAlignment(.center)
                     }
                     Button {
-                        self.text = shared.buttonUpDown(plus: true, text: text)
+                        self.shared.weightStore = shared.buttonUpDown(plus: true, text: self.shared.weightStore)
                     } label: {
                         ButtonPlus(size: size, text: "+")
                     }
                 }
                 Button {
-                    shared.weightStore = Double(text)!
+                    self.shared.setData(str: shared.weightStore)
                 } label: {
                     ZStack {
                         Rectangle()
@@ -59,15 +60,16 @@ struct Weight: View {
                             .font(.system(size: 18, weight: .bold))
                     }
                 }.padding(.top, 45)
-
             }
+        }.onAppear {
+            shared.getStoredData()
         }
     }
 }
 
 
-struct Weight_Previews: PreviewProvider {
-    static var previews: some View {
-        Weight()
-    }
-}
+//struct Weight_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Weight(model: Authentication())
+//    }
+//}

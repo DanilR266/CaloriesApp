@@ -19,7 +19,7 @@ struct MainScreen: View {
     @State private var selected = 2
     @State var menu: Bool = false
     var size = Size()
-    @ObservedObject var authModel = Authentication()
+    @StateObject var authModel: Authentication
     
     var body: some View {
         NavigationView {
@@ -98,6 +98,7 @@ struct MainScreen: View {
                     
                     Button {
                         authModel.signOut()
+                        authModel.docId = ""
                     } label: {
                         HStack(spacing: 0) {
                             Circle()
@@ -136,8 +137,8 @@ struct MainScreen: View {
 
 
 
-struct MainScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        MainScreen()
-    }
-}
+//struct MainScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainScreen()
+//    }
+//}

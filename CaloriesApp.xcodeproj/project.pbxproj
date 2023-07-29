@@ -43,6 +43,7 @@
 		7EB436E42A30EB7D0052AA01 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436E32A30EB7D0052AA01 /* ButtonViews.swift */; };
 		7EB436E62A30EBF30052AA01 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436E52A30EBF30052AA01 /* WeightView.swift */; };
 		7EB436ED2A30EFB90052AA01 /* ModelWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436EC2A30EFB90052AA01 /* ModelWeight.swift */; };
+		7EC1634F2A75841000914BFA /* CheckNewDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1634E2A75841000914BFA /* CheckNewDay.swift */; };
 		7EDBD3782A65881E00A8AF23 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBD3772A65881E00A8AF23 /* View+Extension.swift */; };
 		7EDBD37A2A65941100A8AF23 /* CaloriesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBD3792A65941100A8AF23 /* CaloriesSettingsView.swift */; };
 		7EE229302A5416DE00C554CE /* SettingsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2292F2A5416DE00C554CE /* SettingsMain.swift */; };
@@ -93,6 +94,7 @@
 		7EB436E32A30EB7D0052AA01 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		7EB436E52A30EBF30052AA01 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		7EB436EC2A30EFB90052AA01 /* ModelWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelWeight.swift; sourceTree = "<group>"; };
+		7EC1634E2A75841000914BFA /* CheckNewDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNewDay.swift; sourceTree = "<group>"; };
 		7EDBD3772A65881E00A8AF23 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		7EDBD3792A65941100A8AF23 /* CaloriesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesSettingsView.swift; sourceTree = "<group>"; };
 		7EE2292F2A5416DE00C554CE /* SettingsMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMain.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				7E702DD029F3BF64005FD4AB /* AuthViewModel.swift */,
+				7EC1634E2A75841000914BFA /* CheckNewDay.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				7EE229322A55492F00C554CE /* Color+Extension.swift in Sources */,
 				7E68D0B129F1BDEE00D0EE02 /* ContentView.swift in Sources */,
 				7E39BBC62A50630F00E017ED /* CaloriesFrontSide.swift in Sources */,
+				7EC1634F2A75841000914BFA /* CheckNewDay.swift in Sources */,
 				7E68D0AF29F1BDEE00D0EE02 /* CaloriesAppApp.swift in Sources */,
 				7E702DCF29F3BE92005FD4AB /* AuthView.swift in Sources */,
 				7EA24ABB29F856DD00B2B65B /* StrokeTextView.swift in Sources */,

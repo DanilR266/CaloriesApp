@@ -11,6 +11,7 @@ struct ViewQuestions: View {
     var size = Size()
     @State var selectedButton: String = TypeOfGoal.loss.rawValue
     @State var selectedActivity: String = Activity.no.rawValue
+    @State var selectedSex: String = Sex.man.rawValue
     @State var age: Int = 18
     @State var height: Int = 170
     @State var weightNow: String = ""
@@ -80,6 +81,42 @@ struct ViewQuestions: View {
                                         .foregroundColor(selectedButton == TypeOfGoal.support.rawValue ? .buttonColor : .white)
                                         .font(.system(size: 12, weight: .bold))
                                     
+                                }
+                            }
+                        }
+                        
+                        Text("Пол").font(.system(size: 20, weight: .medium)).padding(.bottom, size.scaleHeight(20))
+                        HStack {
+                            Button {
+                                withAnimation {
+                                    selectedSex = Sex.man.rawValue
+                                }
+                            } label: {
+                                ZStack(alignment: .center) {
+                                    Rectangle()
+                                        .frame(width: size.scaleWidth(150), height: size.scaleHeight(30))
+                                        .cornerRadius(7)
+                                        .foregroundColor(selectedSex == Sex.man.rawValue ? .fieldCalories : .buttonColor)
+                                    Text(Sex.man.rawValue)
+                                        .foregroundColor(selectedSex == Sex.man.rawValue ? .buttonColor : .white)
+                                        .font(.system(size: 12, weight: .bold))
+                                    
+                                }
+                            }
+                            
+                            Button {
+                                withAnimation {
+                                    selectedSex = Sex.woman.rawValue
+                                }
+                            } label: {
+                                ZStack(alignment: .center) {
+                                    Rectangle()
+                                        .frame(width: size.scaleWidth(150), height: size.scaleHeight(30))
+                                        .cornerRadius(7)
+                                        .foregroundColor(selectedSex == Sex.woman.rawValue ? .fieldCalories : .buttonColor)
+                                    Text(Sex.woman.rawValue)
+                                        .foregroundColor(selectedSex == Sex.woman.rawValue ? .buttonColor : .white)
+                                        .font(.system(size: 12, weight: .bold))
                                 }
                             }
                         }
@@ -196,8 +233,10 @@ struct ViewQuestions: View {
                     }
                     
                     Button {
+                        print(weightNow, type(of: weightNow))
                         viewModel.login()
-                        viewModel.setDataAfterRegistration(goalCal: selectedButton, activity: selectedActivity, age: age, height: height, weightNow: weightNow, weightGoal: weightGoal)
+                        viewModel.setDataAfterRegistration(goalCal: selectedButton, activity: selectedActivity, age: age, height: height, weightNow: weightNow, weightGoal: weightGoal, sex: selectedSex)
+                        viewModel.calorieCalculator(weight: weightNow, height: height, age: age, sex: selectedSex, goal: selectedButton, activity: selectedActivity)
                     } label: {
                         ZStack(alignment: .center) {
                             Rectangle()

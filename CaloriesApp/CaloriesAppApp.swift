@@ -22,13 +22,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct CaloriesAppApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @ObservedObject var auth = Authentication()
+    @StateObject var auth = Authentication()
+    @StateObject var checkDay = CheckNewDay()
     var body: some Scene {
         WindowGroup {
             NavigationView {
+//                AuthViewMain(viewModel: auth)
                 if !auth.authenticated {
-                    AuthViewMain()
-                } else { MainScreen() }
+                    AuthViewMain(viewModel: auth)
+                } else {
+                    MainScreen(authModel: auth)
+                        .onAppear {
+                            if !checkDay.check() { auth.updateCalories() }
+                        }
+                }
             }
         }
     }

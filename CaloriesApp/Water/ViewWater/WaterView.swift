@@ -25,6 +25,8 @@ struct WaterView: View {
                     .multilineTextAlignment(.center)
                 HStack(spacing: 20) {
                     Text("Выпито сегодня")
+                        .foregroundColor(.buttonColor)
+                        .font(.system(size: 18, weight: .medium))
                     ZStack {
                         Circle()
                             .strokeBorder(Color.buttonColor, lineWidth: 2)

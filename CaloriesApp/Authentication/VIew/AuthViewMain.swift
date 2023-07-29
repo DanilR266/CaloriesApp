@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthViewMain: View {
-    @ObservedObject var viewModel = Authentication()
+    @ObservedObject var viewModel: Authentication
     var body: some View {
         if viewModel.goodRegistration {
             ViewQuestions(viewModel: viewModel).animation(.easeIn, value: viewModel.goodRegistration)
@@ -21,6 +21,6 @@ struct AuthViewMain: View {
 
 struct AuthViewMain_Previews: PreviewProvider {
     static var previews: some View {
-        AuthViewMain()
+        AuthViewMain(viewModel: Authentication())
     }
 }

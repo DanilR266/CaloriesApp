@@ -33,10 +33,10 @@ struct CaloriesFrontSide: View {
                 ViewAdd(keyboard: keyboardResponder, name: "Блюдо", type: $food, keyboardType: .default)
                 
                 Button {
-                    shared.calories += Int(calories) ?? 0
+//                    shared.calories += Int(calories) ?? 0
+                    shared.addCalories(calorie: Int(calories) ?? 0)
                     calories = ""
                     keyboardResponder.hideKeyboard()
-                    shared.setCal(str: food)
                 } label: {
                     ZStack {
                         Rectangle()
@@ -52,7 +52,7 @@ struct CaloriesFrontSide: View {
                     withAnimation {
                         shared.flipCard()
                     }
-                    shared.getStored()
+//                    shared.getStored()
                 } label: {
                     ZStack {
                         Rectangle()

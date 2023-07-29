@@ -7,12 +7,19 @@
 
 import Foundation
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 class CaloriesViewModel: ObservableObject {
-    var fireStore = Authentication()
+//    var fireStore = Authentication()
     @AppStorage("calories") var calories: Int = 0 {
         willSet { objectWillChange.send() }
     }
+    @AppStorage("CaloriesGoal") var caloriesGoal = 0 {
+        willSet { objectWillChange.send() }
+    }
+    @AppStorage("id") var docId = ""
+    
     @Published var calForView: Int = 0
     
     @Published var backDegree = 0.0
@@ -50,19 +57,80 @@ class CaloriesViewModel: ObservableObject {
     }
     
     func addCalories(calorie: Int) {
-        self.calories = calorie
-        self.calForView = calorie
+        self.calories += calorie
+//        self.calForView = calorie
+        self.setData(number: self.calories)
     }
     
     func fastCahngeCalories(fastChange: Int) {
         self.calories = self.calories + fastChange >= 0  ? self.calories + fastChange : self.calories
+        self.setData(number: self.calories)
     }
     
-    func setCal(str: String) {
-        fireStore.setData(str: str)
-    }
-    func getStored() {
-        fireStore.getStoredData()
+    func getStoredData() {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(docId)
+        docRef.getDocument { (document, error) in
+            let currentThread2 = Thread.current
+            if let document = document, document.exists {
+                DispatchQueue.main.async {
+                    self.calories = document.data()?["CaloriesNow"] as! Int
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
+    func setData(number: Int) {
+        let db = Firestore.firestore()
+        db.collection("usersNew").document("\(docId)").updateData([
+            "CaloriesNow": number
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
+//    func setCal(str: String) {
+//        fireStore.setData(str: str)
+//    }
+//    func getStored() {
+//        fireStore.getStoredData()
+//    }
+    
+    func calorieCalculator(weight: String, height: Int, age: Int, sex: String, goal: String, activity: String) -> Int {
+        var caloriesOne: Double = 0
+        switch sex {
+        case Sex.man.rawValue:
+            let help1 = (13.397 * Double(weight)!)
+            let help2 = (4.799 * Double(height)) - (5.677 * Double(age))
+            caloriesOne = 88.362 + help1 + help2
+        default:
+            let help1 = (9.247 * Double(weight)!)
+            let help2 = (3.098 * Double(height)) - (4.330 * Double(age))
+            caloriesOne = 447.593 + help1 + help2
+        }
+        switch activity {
+        case Activity.no.rawValue:
+            caloriesOne *= 1.2
+        case Activity.oneTwo.rawValue:
+            caloriesOne *= 1.375
+        case Activity.threeFive.rawValue:
+            caloriesOne *= 1.55
+        default:
+            caloriesOne *= 1.725
+        }
+        switch goal {
+        case TypeOfGoal.loss.rawValue:
+            return Int(caloriesOne * 0.85)
+        case TypeOfGoal.gain.rawValue:
+            return Int(caloriesOne * 1.1)
+        default:
+            return Int(caloriesOne)
+        }
+    }
 }

@@ -25,4 +25,9 @@ enum Activity: String {
     case moreFive = "Физическая нагрузка больше 5 раз в неделю"
 }
 
+enum Sex: String {
+    case man = "Мужчина"
+    case woman = "Женщина"
+}
+
 

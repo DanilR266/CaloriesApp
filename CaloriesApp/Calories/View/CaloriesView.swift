@@ -18,7 +18,7 @@ struct ProgressBar: View {
                     .foregroundColor(.white)
                     .cornerRadius(5)
                 Rectangle()
-                    .frame(width: shared.amountBar(amount: Int(amount), max: 3000)<=300 ? CGFloat(shared.amountBar(amount: Int(amount), max: 3000)) : 300, height: 10)
+                    .frame(width: shared.amountBar(amount: Int(amount), max: shared.caloriesGoal)<=300 ? CGFloat(shared.amountBar(amount: Int(amount), max: shared.caloriesGoal)) : 300, height: 10)
                     .foregroundColor(.black)
                     .cornerRadius(5)
             }
@@ -26,7 +26,7 @@ struct ProgressBar: View {
                 Text("0")
                     .font(.system(size: 18, weight: .bold))
                 Spacer()
-                Text("3000")
+                Text("\(shared.caloriesGoal)")
                     .font(.system(size: 18, weight: .bold))
             }.frame(width: 300)
         }
@@ -43,7 +43,8 @@ struct MainCalories: View {
             CaloriesFrontSide(keyboardResponder: keyboardResponder, degree: $shared.frontDegree, shared: shared).opacity(!shared.isFlipped ? 0 : 1)
         }.onChange(of: shared.isFlipped) { newValue in
             print("flip")
-//            shared.flipCard()
+        }.onAppear {
+            shared.getStoredData()
         }
     }
 }
