@@ -28,7 +28,7 @@ struct CaloriesAppApp: App {
         WindowGroup {
             NavigationView {
 //                AuthViewMain(viewModel: auth)
-                if !auth.authenticated {
+                if auth.authenticated {
                     AuthViewMain(viewModel: auth)
                 } else {
                     MainScreen(authModel: auth)

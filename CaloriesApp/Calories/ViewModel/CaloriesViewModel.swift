@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 
 class CaloriesViewModel: ObservableObject {
-//    var fireStore = Authentication()
+    let modelCalories = ModelCalories()
     @AppStorage("calories") var calories: Int = 0 {
         willSet { objectWillChange.send() }
     }
@@ -68,39 +68,14 @@ class CaloriesViewModel: ObservableObject {
     }
     
     func getStoredData() {
-        let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
-        docRef.getDocument { (document, error) in
-            let currentThread2 = Thread.current
-            if let document = document, document.exists {
-                DispatchQueue.main.async {
-                    self.calories = document.data()?["CaloriesNow"] as! Int
-                }
-            } else {
-                print("Document does not exist")
-            }
+        modelCalories.getStoredData(docId: docId) { calories, error in
+            self.calories = calories ?? 0
         }
     }
     
     func setData(number: Int) {
-        let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
-            "CaloriesNow": number
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
+        modelCalories.setData(number: number, docId: docId)
     }
-    
-//    func setCal(str: String) {
-//        fireStore.setData(str: str)
-//    }
-//    func getStored() {
-//        fireStore.getStoredData()
-//    }
     
     func calorieCalculator(weight: String, height: Int, age: Int, sex: String, goal: String, activity: String) -> Int {
         var caloriesOne: Double = 0

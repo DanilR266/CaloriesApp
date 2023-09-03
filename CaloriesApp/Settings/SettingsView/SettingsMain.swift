@@ -11,7 +11,6 @@ struct SettingsMain: View {
     @State var selectedTab = 1
     var body: some View {
         ZStack {
-            
             TabView(selection: $selectedTab) {
                 CaloriesSettingsView().tabItem {
                     Text("Калории")

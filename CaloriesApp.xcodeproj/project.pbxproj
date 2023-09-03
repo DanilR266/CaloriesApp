@@ -14,6 +14,7 @@
 		7E39BBC42A4D902A00E017ED /* CaloriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC32A4D902A00E017ED /* CaloriesModel.swift */; };
 		7E39BBC62A50630F00E017ED /* CaloriesFrontSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC52A50630F00E017ED /* CaloriesFrontSide.swift */; };
 		7E39BBC82A50631800E017ED /* CaloriesBackSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC72A50631800E017ED /* CaloriesBackSide.swift */; };
+		7E45C1CB2AA4B9F400E011E7 /* ProgressWeightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45C1CA2AA4B9F400E011E7 /* ProgressWeightModel.swift */; };
 		7E4BD96C2A6E3C5000AB045E /* CaloriesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD96B2A6E3C5000AB045E /* CaloriesAppTests.swift */; };
 		7E4BD9782A6E3E5400AB045E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7E4BD9772A6E3E5400AB045E /* FirebaseAuth */; };
 		7E4BD97E2A6E5EF100AB045E /* ViewQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD97D2A6E5EF100AB045E /* ViewQuestions.swift */; };
@@ -33,7 +34,7 @@
 		7E702DCF29F3BE92005FD4AB /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E702DCE29F3BE92005FD4AB /* AuthView.swift */; };
 		7E702DD129F3BF64005FD4AB /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E702DD029F3BF64005FD4AB /* AuthViewModel.swift */; };
 		7E704C182A56AD9B009F37AC /* SettingsProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E704C172A56AD9B009F37AC /* SettingsProfile.swift */; };
-		7E704C1A2A56AE8B009F37AC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E704C192A56AE8B009F37AC /* Model.swift */; };
+		7E704C1A2A56AE8B009F37AC /* ModelSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E704C192A56AE8B009F37AC /* ModelSettings.swift */; };
 		7E801A9A29F958BD00AAB764 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 7E801A9929F958BD00AAB764 /* SlidingTabView */; };
 		7EA24AB729F7E06C00B2B65B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24AB629F7E06C00B2B65B /* AuthModel.swift */; };
 		7EA24AB929F8566A00B2B65B /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24AB829F8566A00B2B65B /* MainScreen.swift */; };
@@ -44,6 +45,13 @@
 		7EB436E62A30EBF30052AA01 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436E52A30EBF30052AA01 /* WeightView.swift */; };
 		7EB436ED2A30EFB90052AA01 /* ModelWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436EC2A30EFB90052AA01 /* ModelWeight.swift */; };
 		7EC1634F2A75841000914BFA /* CheckNewDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1634E2A75841000914BFA /* CheckNewDay.swift */; };
+		7ED2C5782A76257F00186473 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2C5772A76257F00186473 /* ProgressView.swift */; };
+		7ED2C57A2A76259100186473 /* ProgressWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2C5792A76259100186473 /* ProgressWeight.swift */; };
+		7ED2C57C2A76265D00186473 /* ProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2C57B2A76265D00186473 /* ProgressModel.swift */; };
+		7ED2C57F2A776F8100186473 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2C57E2A776F8100186473 /* SettingsViewModel.swift */; };
+		7ED2C5812A777C9E00186473 /* ProgressWeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2C5802A777C9E00186473 /* ProgressWeightViewModel.swift */; };
+		7ED2C5832A77BB5D00186473 /* ProgressCalories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2C5822A77BB5D00186473 /* ProgressCalories.swift */; };
+		7ED2C5852A77BBC300186473 /* ProgressModelCalories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2C5842A77BBC300186473 /* ProgressModelCalories.swift */; };
 		7EDBD3782A65881E00A8AF23 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBD3772A65881E00A8AF23 /* View+Extension.swift */; };
 		7EDBD37A2A65941100A8AF23 /* CaloriesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDBD3792A65941100A8AF23 /* CaloriesSettingsView.swift */; };
 		7EE229302A5416DE00C554CE /* SettingsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2292F2A5416DE00C554CE /* SettingsMain.swift */; };
@@ -68,6 +76,7 @@
 		7E39BBC32A4D902A00E017ED /* CaloriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesModel.swift; sourceTree = "<group>"; };
 		7E39BBC52A50630F00E017ED /* CaloriesFrontSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesFrontSide.swift; sourceTree = "<group>"; };
 		7E39BBC72A50631800E017ED /* CaloriesBackSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesBackSide.swift; sourceTree = "<group>"; };
+		7E45C1CA2AA4B9F400E011E7 /* ProgressWeightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWeightModel.swift; sourceTree = "<group>"; };
 		7E4BD9692A6E3C5000AB045E /* CaloriesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaloriesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E4BD96B2A6E3C5000AB045E /* CaloriesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesAppTests.swift; sourceTree = "<group>"; };
 		7E4BD9732A6E3D5C00AB045E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -85,7 +94,7 @@
 		7E702DCE29F3BE92005FD4AB /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		7E702DD029F3BF64005FD4AB /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		7E704C172A56AD9B009F37AC /* SettingsProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfile.swift; sourceTree = "<group>"; };
-		7E704C192A56AE8B009F37AC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7E704C192A56AE8B009F37AC /* ModelSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSettings.swift; sourceTree = "<group>"; };
 		7EA24AB629F7E06C00B2B65B /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		7EA24AB829F8566A00B2B65B /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		7EA24ABA29F856DD00B2B65B /* StrokeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeTextView.swift; sourceTree = "<group>"; };
@@ -95,6 +104,13 @@
 		7EB436E52A30EBF30052AA01 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		7EB436EC2A30EFB90052AA01 /* ModelWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelWeight.swift; sourceTree = "<group>"; };
 		7EC1634E2A75841000914BFA /* CheckNewDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNewDay.swift; sourceTree = "<group>"; };
+		7ED2C5772A76257F00186473 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		7ED2C5792A76259100186473 /* ProgressWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWeight.swift; sourceTree = "<group>"; };
+		7ED2C57B2A76265D00186473 /* ProgressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressModel.swift; sourceTree = "<group>"; };
+		7ED2C57E2A776F8100186473 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		7ED2C5802A777C9E00186473 /* ProgressWeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWeightViewModel.swift; sourceTree = "<group>"; };
+		7ED2C5822A77BB5D00186473 /* ProgressCalories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCalories.swift; sourceTree = "<group>"; };
+		7ED2C5842A77BBC300186473 /* ProgressModelCalories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressModelCalories.swift; sourceTree = "<group>"; };
 		7EDBD3772A65881E00A8AF23 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		7EDBD3792A65941100A8AF23 /* CaloriesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesSettingsView.swift; sourceTree = "<group>"; };
 		7EE2292F2A5416DE00C554CE /* SettingsMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMain.swift; sourceTree = "<group>"; };
@@ -133,6 +149,35 @@
 				7EDBD37B2A65941C00A8AF23 /* View */,
 			);
 			path = Calories;
+			sourceTree = "<group>";
+		};
+		7E45C1C72AA4900D00E011E7 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2292F2A5416DE00C554CE /* SettingsMain.swift */,
+				7E704C172A56AD9B009F37AC /* SettingsProfile.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		7E45C1C82AA4B9A100E011E7 /* ProgressWeight */ = {
+			isa = PBXGroup;
+			children = (
+				7ED2C5802A777C9E00186473 /* ProgressWeightViewModel.swift */,
+				7ED2C5792A76259100186473 /* ProgressWeight.swift */,
+				7E45C1CA2AA4B9F400E011E7 /* ProgressWeightModel.swift */,
+			);
+			path = ProgressWeight;
+			sourceTree = "<group>";
+		};
+		7E45C1C92AA4B9B100E011E7 /* ProgressCalories */ = {
+			isa = PBXGroup;
+			children = (
+				7ED2C57B2A76265D00186473 /* ProgressModel.swift */,
+				7ED2C5822A77BB5D00186473 /* ProgressCalories.swift */,
+				7ED2C5842A77BBC300186473 /* ProgressModelCalories.swift */,
+			);
+			path = ProgressCalories;
 			sourceTree = "<group>";
 		};
 		7E4BD96A2A6E3C5000AB045E /* CaloriesAppTests */ = {
@@ -206,9 +251,10 @@
 		7E68D0AD29F1BDEE00D0EE02 /* CaloriesApp */ = {
 			isa = PBXGroup;
 			children = (
-				7EE2292E2A5416BB00C554CE /* Settings */,
 				7E68D0B229F1BDEF00D0EE02 /* Assets.xcassets */,
 				7E39BBBC2A4D855700E017ED /* GoogleService-Info.plist */,
+				7ED2C5762A76245000186473 /* Progress */,
+				7EE2292E2A5416BB00C554CE /* Settings */,
 				7EB436E12A30E34A0052AA01 /* FireStoreData.swift */,
 				7E68D0AE29F1BDEE00D0EE02 /* CaloriesAppApp.swift */,
 				7E702DCA29F3BE47005FD4AB /* Authentication */,
@@ -316,6 +362,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7ED2C5762A76245000186473 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				7E45C1C92AA4B9B100E011E7 /* ProgressCalories */,
+				7E45C1C82AA4B9A100E011E7 /* ProgressWeight */,
+				7ED2C5772A76257F00186473 /* ProgressView.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		7ED2C57D2A776F6400186473 /* SettingsViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7ED2C57E2A776F8100186473 /* SettingsViewModel.swift */,
+			);
+			path = SettingsViewModel;
+			sourceTree = "<group>";
+		};
 		7EDBD37B2A65941C00A8AF23 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,9 +410,9 @@
 		7EE2292E2A5416BB00C554CE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				7EE2292F2A5416DE00C554CE /* SettingsMain.swift */,
-				7E704C172A56AD9B009F37AC /* SettingsProfile.swift */,
-				7E704C192A56AE8B009F37AC /* Model.swift */,
+				7E45C1C72AA4900D00E011E7 /* SettingsView */,
+				7ED2C57D2A776F6400186473 /* SettingsViewModel */,
+				7E704C192A56AE8B009F37AC /* ModelSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -476,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ED2C57A2A76259100186473 /* ProgressWeight.swift in Sources */,
 				7E39BBC22A4D902100E017ED /* CaloriesViewModel.swift in Sources */,
 				7EE229302A5416DE00C554CE /* SettingsMain.swift in Sources */,
 				7E704C182A56AD9B009F37AC /* SettingsProfile.swift in Sources */,
@@ -493,18 +558,25 @@
 				7EDBD3782A65881E00A8AF23 /* View+Extension.swift in Sources */,
 				7EB436DD2A307E460052AA01 /* ViewModelWeight.swift in Sources */,
 				7E1AB9412A626A370005E819 /* KeyboardDetect.swift in Sources */,
+				7E45C1CB2AA4B9F400E011E7 /* ProgressWeightModel.swift in Sources */,
+				7ED2C5852A77BBC300186473 /* ProgressModelCalories.swift in Sources */,
 				7E6C98412A6705A300480C64 /* PathTest.swift in Sources */,
 				7E39BBC82A50631800E017ED /* CaloriesBackSide.swift in Sources */,
+				7ED2C57F2A776F8100186473 /* SettingsViewModel.swift in Sources */,
 				7EE229322A55492F00C554CE /* Color+Extension.swift in Sources */,
 				7E68D0B129F1BDEE00D0EE02 /* ContentView.swift in Sources */,
 				7E39BBC62A50630F00E017ED /* CaloriesFrontSide.swift in Sources */,
 				7EC1634F2A75841000914BFA /* CheckNewDay.swift in Sources */,
 				7E68D0AF29F1BDEE00D0EE02 /* CaloriesAppApp.swift in Sources */,
 				7E702DCF29F3BE92005FD4AB /* AuthView.swift in Sources */,
+				7ED2C57C2A76265D00186473 /* ProgressModel.swift in Sources */,
 				7EA24ABB29F856DD00B2B65B /* StrokeTextView.swift in Sources */,
+				7ED2C5812A777C9E00186473 /* ProgressWeightViewModel.swift in Sources */,
 				7EA24AB729F7E06C00B2B65B /* AuthModel.swift in Sources */,
-				7E704C1A2A56AE8B009F37AC /* Model.swift in Sources */,
+				7E704C1A2A56AE8B009F37AC /* ModelSettings.swift in Sources */,
 				7E4BD9802A6E70D000AB045E /* AuthViewMain.swift in Sources */,
+				7ED2C5782A76257F00186473 /* ProgressView.swift in Sources */,
+				7ED2C5832A77BB5D00186473 /* ProgressCalories.swift in Sources */,
 				7E6176222A33325B00FEB4DD /* ScaleScreen.swift in Sources */,
 				7EB436ED2A30EFB90052AA01 /* ModelWeight.swift in Sources */,
 			);

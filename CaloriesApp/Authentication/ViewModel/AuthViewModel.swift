@@ -91,7 +91,9 @@ class Authentication: ObservableObject {
                     "WeightNow": "50",
                     "WeightGoal": "50",
                     "Sex": Sex.man.rawValue,
-                    "CaloriesNow": 0
+                    "CaloriesNow": 0,
+                    "Max": "50",
+                    "Min": "50"
                 ]).getDocument { res, arg  in
                     self.docIdNow = res?.documentID ?? ""
                     self.docId = self.docIdNow
@@ -115,49 +117,38 @@ class Authentication: ObservableObject {
 //        }
 //    }
     
-    func signOut() {
-        let firebaseAuth = Auth.auth()
-        do {
-          try
-            firebaseAuth.signOut()
-            authenticated.toggle()
-        } catch let signOutError as NSError {
-          print("Error signing out: %@", signOutError)
-        }
-    }
-    
-    // TEST
-    func calorieCalculator(weight: String, height: Int, age: Int, sex: String, goal: String, activity: String) {
-        var caloriesOne: Double = 0
-        switch sex {
-        case Sex.man.rawValue:
-            let help1 = (13.397 * Double(weight)!)
-            let help2 = (4.799 * Double(height)) - (5.677 * Double(age))
-            caloriesOne = 88.362 + help1 + help2
-        default:
-            let help1 = (9.247 * Double(weight)!)
-            let help2 = (3.098 * Double(height)) - (4.330 * Double(age))
-            caloriesOne = 447.593 + help1 + help2
-        }
-        switch activity {
-        case Activity.no.rawValue:
-            caloriesOne *= 1.2
-        case Activity.oneTwo.rawValue:
-            caloriesOne *= 1.375
-        case Activity.threeFive.rawValue:
-            caloriesOne *= 1.55
-        default:
-            caloriesOne *= 1.725
-        }
-        switch goal {
-        case TypeOfGoal.loss.rawValue:
-            self.caloriesGoal = Int(caloriesOne * 0.85)
-        case TypeOfGoal.gain.rawValue:
-            self.caloriesGoal = Int(caloriesOne * 1.1)
-        default:
-            self.caloriesGoal = Int(caloriesOne)
-        }
-    }
+// TEST
+//    func calorieCalculator(weight: String, height: Int, age: Int, sex: String, goal: String, activity: String) {
+//        var caloriesOne: Double = 0
+//        switch sex {
+//        case Sex.man.rawValue:
+//            let help1 = (13.397 * Double(weight)!)
+//            let help2 = (4.799 * Double(height)) - (5.677 * Double(age))
+//            caloriesOne = 88.362 + help1 + help2
+//        default:
+//            let help1 = (9.247 * Double(weight)!)
+//            let help2 = (3.098 * Double(height)) - (4.330 * Double(age))
+//            caloriesOne = 447.593 + help1 + help2
+//        }
+//        switch activity {
+//        case Activity.no.rawValue:
+//            caloriesOne *= 1.2
+//        case Activity.oneTwo.rawValue:
+//            caloriesOne *= 1.375
+//        case Activity.threeFive.rawValue:
+//            caloriesOne *= 1.55
+//        default:
+//            caloriesOne *= 1.725
+//        }
+//        switch goal {
+//        case TypeOfGoal.loss.rawValue:
+//            self.caloriesGoal = Int(caloriesOne * 0.85)
+//        case TypeOfGoal.gain.rawValue:
+//            self.caloriesGoal = Int(caloriesOne * 1.1)
+//        default:
+//            self.caloriesGoal = Int(caloriesOne)
+//        }
+//    }
     // TEST
     
     func setDataAfterRegistration(goalCal: String, activity: String, age: Int, height: Int, weightNow: String, weightGoal: String, sex: String) {
@@ -170,7 +161,9 @@ class Authentication: ObservableObject {
             "WeightNow": weightNow == "" ? "50" : weightNow,
             "WeightGoal": weightGoal == "" ? "50" : weightGoal,
             "Sex": sex,
-            "CaloriesNow": 0
+            "CaloriesNow": 0,
+            "Max": weightNow,
+            "Min": weightNow
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

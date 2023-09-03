@@ -12,9 +12,13 @@ import SwiftUI
 
 class WeightViewModel: ObservableObject {
     
+    let modelWeight = ModelWeight()
+    
     @AppStorage("id") var docId = ""
     
     @Published var weightStore = "Load..."
+    @Published var weightMin = "0"
+    @Published var weightMax = "0"
     
 //    @ObservedObject var shared: Authentication
 
@@ -56,34 +60,40 @@ class WeightViewModel: ObservableObject {
     
     
     func getStoredData() {
+        modelWeight.getStoredData(docId: docId) { weightStore, weightMin, weightMax in
+            self.weightStore = weightStore ?? "0"
+            self.weightMin = weightMin ?? "0"
+            self.weightMax = weightMax ?? "0"
+        }
+    }
+    
+    private func setMinMax() {
+        print(self.weightMax, self.weightMin, self.weightStore)
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
-        docRef.getDocument { (document, error) in
-            let currentThread2 = Thread.current
-            if let threadName = currentThread2.name {
-                print("Текущий поток2: \(threadName)")
-            } else {
-                print("Текущий поток2: безымянный")
-            }
-
-            if let document = document, document.exists {
-                DispatchQueue.main.async {
-                    self.weightStore = String(Double(document.data()?["WeightNow"] as! String)!)
-                }
-            } else {
-                print("Document does not exist")
-            }
+        if self.weightMax < self.weightStore {
+            self.weightMax = self.weightStore
+            db.collection("usersNew").document("\(docId)").updateData([
+                "Max": self.weightStore
+            ])
+        }
+        if self.weightMin > self.weightStore {
+            self.weightMin = self.weightStore
+            db.collection("usersNew").document("\(docId)").updateData([
+                "Min": self.weightStore
+            ])
         }
     }
     
     func setData(str: String) {
+        setMinMax()
         let db = Firestore.firestore()
         db.collection("usersNew").document("\(docId)").updateData([
-            "WeightNow": str
+            "WeightNow": str,
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
+                print(str)
                 print("Document successfully written!")
             }
         }

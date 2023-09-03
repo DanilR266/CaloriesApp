@@ -19,13 +19,23 @@ class CheckNewDay: ObservableObject {
     @AppStorage("year") var yearP = 2023 {
         willSet { objectWillChange.send() }
     }
+    @AppStorage("date") var date = "2023-07-31" {
+        willSet { objectWillChange.send() }
+    }
     
     let dayComponent = Calendar.current.component(.day, from: Date())
     let monthComponent = Calendar.current.component(.month, from: Date())
     let yearComponent = Calendar.current.component(.year, from: Date())
-    
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
+
     func check() -> Bool {
-        if self.yearComponent > self.yearP || self.monthComponent > self.monthP || self.yearComponent > self.yearP {
+        let currentDate = Date()
+        let formattedDate = formatDate(currentDate)
+        if formattedDate != self.date {
             updateComponents()
             return false
         }
@@ -35,9 +45,9 @@ class CheckNewDay: ObservableObject {
     }
     
     func updateComponents() {
-        self.dayP = dayComponent
-        self.monthP = monthComponent
-        self.yearP = yearComponent
+        let currentDate = Date()
+        let formattedDate = formatDate(currentDate)
+        self.date = formattedDate
     }
 
 

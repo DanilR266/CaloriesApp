@@ -236,7 +236,7 @@ struct ViewQuestions: View {
                         print(weightNow, type(of: weightNow))
                         viewModel.login()
                         viewModel.setDataAfterRegistration(goalCal: selectedButton, activity: selectedActivity, age: age, height: height, weightNow: weightNow, weightGoal: weightGoal, sex: selectedSex)
-                        viewModel.calorieCalculator(weight: weightNow, height: height, age: age, sex: selectedSex, goal: selectedButton, activity: selectedActivity)
+//                        viewModel.calorieCalculator(weight: weightNow, height: height, age: age, sex: selectedSex, goal: selectedButton, activity: selectedActivity)
                     } label: {
                         ZStack(alignment: .center) {
                             Rectangle()

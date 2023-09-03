@@ -28,11 +28,14 @@ struct MainScreen: View {
                     Color.backgroundColor.ignoresSafeArea()
                     VStack(spacing: 0) {
                         HStack {
-                            ButtonSetting().onTapGesture {
+                            Button {
                                 withAnimation {
                                     menu.toggle()
                                 }
+                            } label: {
+                                ButtonSetting()
                             }
+
                             
                             Spacer()
                             
@@ -95,26 +98,8 @@ struct MainScreen: View {
                                 .offset(x: -size.scaleWidth(59)/2)
                         }
                     }.offset(x: menu ? 0 : -size.screenWidth() * 5)
-                    
-                    Button {
-                        authModel.signOut()
-                        authModel.docId = ""
-                    } label: {
-                        HStack(spacing: 0) {
-                            Circle()
-                                .foregroundColor(Color.regButton)
-                                .frame(width: size.scaleWidth(59), height: size.scaleHeight(59))
-                                .shadow(radius: 3, y: 4)
-                            Text("Выйти")
-//                                .frame(width: size.scaleWidth(72))
-                                .foregroundColor(.black)
-                                .font(.system(size: 20, weight: .bold))
-                                .offset(x: -size.scaleWidth(59)/2)
-                        }
-                    }.offset(x: menu ? 0 : -size.screenWidth() * 10)
-                    
-                    Button {
-//                        authModel.signOut()
+                    NavigationLink {
+                        ProgressView()
                     } label: {
                         HStack(spacing: 0) {
                             Circle()
@@ -129,8 +114,9 @@ struct MainScreen: View {
                         }
                     }.offset(x: menu ? 0 : -size.screenWidth() * 10)
                 }.padding(.leading, menu ? 50 : 0)
+                    .padding(.top, 100)
             }
-//            .ignoresSafeArea()
+            .ignoresSafeArea()
         }
     }
 }
