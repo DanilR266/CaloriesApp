@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 class CaloriesViewModel: ObservableObject {
     let modelCalories = ModelCalories()
+    let foodRequest = RequestFood()
+    let translate = CurlRequest()
     @AppStorage("calories") var calories: Int = 0 {
         willSet { objectWillChange.send() }
     }
@@ -22,32 +24,34 @@ class CaloriesViewModel: ObservableObject {
     
     @Published var calForView: Int = 0
     
-    @Published var backDegree = 0.0
-    @Published var frontDegree = -90.0
-    @Published var isFlipped = false
+    @Published var ccal = "0"
+    @Published var prot = "0"
+    @Published var fat = "0"
+    @Published var chocdf = "0"
+    @Published var nameFood = "Блюдо"
     
     @Published var selectedButton: String = TypeOfGoal.loss.rawValue
     @Published var selectedActivity: String = Activity.no.rawValue
     @Published var age: Int = 1
     @Published var height: Int = 170
+
+
     
-    let durationAndDelay : CGFloat = 0.15
-    
-    func flipCard () {
-        isFlipped = !isFlipped
-        if isFlipped {
-            withAnimation(.linear(duration: durationAndDelay)) {
-                backDegree = 90
-            }
-            withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)){
-                frontDegree = 0
-            }
-        } else {
-            withAnimation(.linear(duration: durationAndDelay)) {
-                frontDegree = -90
-            }
-            withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)){
-                backDegree = 0
+    func getNutrients(texts: [String]) {
+        translate.translateText(texts: texts) { result in
+            switch result {
+            case .success(let translations):
+                self.foodRequest.fetchFoodData(ingredient: translations[0]) { value in
+                    DispatchQueue.main.async {
+                        self.ccal = String(value?.enercKcal ?? 0)
+                        self.prot = String(value?.procnt ?? 0)
+                        self.fat = String(value?.fat ?? 0)
+                        self.chocdf = String(value?.chocdf ?? 0)
+                        self.nameFood = texts[0]
+                    }
+                }
+            case .failure(let error):
+                print("Ошибка:", error)
             }
         }
     }

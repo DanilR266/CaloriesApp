@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-import SwiftUI
 
 final class KeyboardResponder: ObservableObject {
     @Published private(set) var keyboardIsShowing: Bool = false

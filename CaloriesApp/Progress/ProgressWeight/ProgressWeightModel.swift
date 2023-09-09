@@ -11,9 +11,7 @@ import FirebaseFirestore
 
 
 class ProgressWeightModel {
-    
-    
-    
+
     func getStoredData(docId: String, completion: @escaping (String?, String?, String?, String?, String?) -> Void) {
         let db = Firestore.firestore()
         let docRef = db.collection("usersNew").document(docId)

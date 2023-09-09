@@ -10,6 +10,7 @@ import SwiftUI
 struct AuthView: View {
     @ObservedObject private var keyboardResponder = KeyboardResponder()
     @ObservedObject var viewModel: Authentication
+    var size = Size()
     var body: some View {
         ZStack {
             Color.backgroundColor.ignoresSafeArea()
@@ -70,7 +71,7 @@ struct AuthView: View {
                                     .padding(.trailing, 44)
                             }
                         }
-                        HStack(spacing: 60) {
+                        VStack(spacing: 12) {
                             Button {
                                 DispatchQueue.main.async {
                                     viewModel.registration(email: viewModel.userEmail, password: viewModel.userPassword, name: viewModel.name)
@@ -80,71 +81,76 @@ struct AuthView: View {
                                 viewModel.regBool = false
                             } label: {
                                 ZStack {
-                                    Circle()
-                                        .foregroundColor(Color.regButton)
-                                        .frame(width: 59, height: 59)
+                                    Rectangle()
+                                        .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
+                                        .cornerRadius(7)
+                                        .foregroundColor(.regButton)
                                         .shadow(radius: 3, y: 4)
                                     Text("Регистрация")
-                                        .frame(maxWidth: 150)
+//                                        .frame(maxWidth: 150)
+                                        .multilineTextAlignment(.center)
                                         .foregroundColor(.black)
                                         .font(.system(size: 20, weight: .bold))
-                                        .offset(x: 62)
+//                                        .offset(x: 62)
                                 }
                             }
                             Button {
                                 viewModel.regBool = false
                             } label: {
                                 ZStack {
-                                    Circle()
-                                        .foregroundColor(Color.regButton)
-                                        .frame(width: 59, height: 59)
+                                    Rectangle()
+                                        .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
+                                        .cornerRadius(7)
+                                        .foregroundColor(.authButton)
                                         .shadow(radius: 3, y: 4)
                                     Text("Вход")
-                                        .frame(maxWidth: 100)
+//                                        .frame(maxWidth: 100)
                                         .foregroundColor(.black)
                                         .font(.system(size: 20, weight: .bold))
-                                        .offset(x: 25)
+//                                        .offset(x: 25)
                                 }
                             }
-                        }.padding(.top, 40).padding(.trailing, 100)
+                        }.padding(.top, 40)
                     }
                 }
                 .offset(y: viewModel.regBool ? 70 : 0)
                 .animation(.spring(), value: viewModel.regBool)
-                HStack(spacing: 40) {
+                VStack(spacing: 12) {
                     Button {
                         viewModel.login()
                         
                     } label: {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(Color.regButton)
-                                .frame(width: 59)
+                        ZStack(alignment: .center) {
+                            Rectangle()
+                                .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
+                                .cornerRadius(7)
+                                .foregroundColor(.authButton)
                                 .shadow(radius: 3, y: 4)
                             Text("Войти")
-                                .frame(maxWidth: 100)
+//                                .frame(maxWidth: size.scaleWidth(285))
                                 .foregroundColor(.black)
                                 .font(.system(size: 20, weight: .bold))
-                                .offset(x: 30)
                         }
                     }
                     Button {
                         viewModel.regBool = true
                     } label: {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(Color.regButton)
-                                .frame(width: 59)
+                        ZStack(alignment: .center) {
+                            Rectangle()
+                                .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
+                                .cornerRadius(7)
+                                .foregroundColor(.regButton)
                                 .shadow(radius: 3, y: 4)
                             Text("Регистрация")
-                                .frame(maxWidth: 150)
+//                                .frame(maxWidth: 150)
                                 .foregroundColor(.black)
                                 .font(.system(size: 20, weight: .bold))
-                                .offset(x: 62)
+                                .multilineTextAlignment(.center)
+//                                .offset(x: 62)
                         }
                             
                     }
-                }.padding(.leading, -70).padding(.top, 30)
+                }.padding(.top, 30)
                     
                     .offset(y: viewModel.regBool ? 500 : 0)
                     .animation(.spring(), value: viewModel.regBool)

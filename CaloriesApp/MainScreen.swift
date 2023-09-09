@@ -9,13 +9,32 @@ import Foundation
 import SwiftUI
 import Firebase
 
+struct MainScreenTabView: View {
+    @StateObject var authModel: Authentication
+    @State var selectedTab = 1
+    var body: some View {
+        ZStack {
+            TabView(selection: $selectedTab) {
+                SettingsMain().tabItem {
+                    Text("Калории")
+                }.tag(0)
+                MainScreen(authModel: authModel).tabItem {
+                    Text("Профиль")
+                }.tag(1)
+                ProgressView().tabItem {
+                    Text("Вес")
+                }.tag(2)
+            }
+        }
+    }
+}
 
 struct MainScreen: View {
     @ObservedObject private var keyboardResponder = KeyboardResponder()
     @State var boolWeight: Bool = false
     @State var boolCalories: Bool = false
     @State var boolWater: Bool = false
-    @State private var selectedTab = 0
+    @State private var selectedTab = 1
     @State private var selected = 2
     @State var menu: Bool = false
     var size = Size()
@@ -28,26 +47,19 @@ struct MainScreen: View {
                     Color.backgroundColor.ignoresSafeArea()
                     VStack(spacing: 0) {
                         HStack {
-                            Button {
-                                withAnimation {
-                                    menu.toggle()
-                                }
-                            } label: {
-                                ButtonSetting()
+                            VStack(alignment: .leading) {
+                                Text("Приветсвую,")
+                                    .font(.system(size: 24, weight: .medium))
+                                    .foregroundColor(.black)
+                                Text(authModel.userName)
+                                    .font(.system(size: 24, weight: .bold))
+                                    .foregroundColor(.black)
                             }
-
-                            
                             Spacer()
-                            
-                            HStack(spacing: 20) {
-                                Text("\(authModel.userName)")
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 30, weight: .bold))
-                                Circle()
-                                    .foregroundColor(.black)
-                                    .frame(width: 49, height: 49)
-                            }.frame(maxWidth: 200)
-                        }.padding(.trailing, 20).padding(.leading, 20).opacity(menu ? 0 : 1)
+                            Circle()
+                                .foregroundColor(.black)
+                                .frame(width: 64, height: 64)
+                        }.padding(.trailing, 40).padding(.leading, 40).opacity(menu ? 0 : 1)
                         
                         TabView(selection: $selectedTab, content: {
                             Weight().tag(0).scaleEffect(selectedTab == 0 ? 1 : 0.8) .animation(.linear(duration: 0.3), value: selectedTab)
@@ -66,57 +78,8 @@ struct MainScreen: View {
                     }
                 }.opacity(!menu ? 1 : 0.5).scaleEffect(menu ? 0.8 : 1).disabled(menu)
                     .offset(y: keyboardResponder.keyboardIsShowing ? -size.scaleHeight(75) : 0)
-                VStack(alignment: .leading, spacing: 30) {
-                    Button {
-                        withAnimation { menu.toggle() }
-                    } label: {
-                        HStack(spacing: 0) {
-                            Circle()
-                                .foregroundColor(Color.regButton)
-                                .frame(width: size.scaleWidth(59), height: size.scaleHeight(59))
-                                .shadow(radius: 3, y: 4)
-                            Text("Вернуться")
-//                                .frame(width: size.scaleWidth(117))
-                                .foregroundColor(.black)
-                                .font(.system(size: 20, weight: .bold))
-                                .offset(x: -size.scaleWidth(59)/2)
-                        }
-                    }.offset(x: menu ? 0 : -size.screenWidth())
-                    
-                    NavigationLink {
-                        SettingsMain()
-                    } label: {
-                        HStack(spacing: 0) {
-                            Circle()
-                                .foregroundColor(Color.regButton)
-                                .frame(width: size.scaleWidth(59), height: size.scaleHeight(59))
-                                .shadow(radius: 3, y: 4)
-                            Text("Настройки")
-//                                .frame(width: size.scaleWidth(121))
-                                .foregroundColor(.black)
-                                .font(.system(size: 20, weight: .bold))
-                                .offset(x: -size.scaleWidth(59)/2)
-                        }
-                    }.offset(x: menu ? 0 : -size.screenWidth() * 5)
-                    NavigationLink {
-                        ProgressView()
-                    } label: {
-                        HStack(spacing: 0) {
-                            Circle()
-                                .foregroundColor(Color.fieldCalories)
-                                .frame(width: size.scaleWidth(59), height: size.scaleHeight(59))
-                                .shadow(radius: 3, y: 4)
-                            Text("Отчетность")
-//                                .frame(width: size.scaleWidth(72))
-                                .foregroundColor(.black)
-                                .font(.system(size: 20, weight: .bold))
-                                .offset(x: -size.scaleWidth(59)/2)
-                        }
-                    }.offset(x: menu ? 0 : -size.screenWidth() * 10)
-                }.padding(.leading, menu ? 50 : 0)
-                    .padding(.top, 100)
             }
-            .ignoresSafeArea()
+//            .ignoresSafeArea()
         }
     }
 }

@@ -31,9 +31,18 @@ struct CaloriesAppApp: App {
                 if auth.authenticated {
                     AuthViewMain(viewModel: auth)
                 } else {
-                    MainScreen(authModel: auth)
+                    MainScreenTabView(authModel: auth)
                         .onAppear {
                             if !checkDay.check() { auth.updateCalories() }
+                            CurlRequest().getOauthToken()
+//                            CurlRequest().translateText(texts: ["Пицца пеперони"]) { result in
+//                                switch result {
+//                                case .success(let translations):
+//                                    print("Переводы:", translations[0])
+//                                case .failure(let error):
+//                                    print("Ошибка:", error)
+//                                }
+//                            }
                         }
                 }
             }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CaloriesBackSide: View {
     var size = Size()
-    var keyboardResponder: KeyboardResponder
-    @Binding var degree: Double
+//    var keyboardResponder: KeyboardResponder
+    @State private var isSheetPresented = false
 //    @Binding var isFlipped: Bool
     @State var rotate: Bool = false
     @State var amount: Int = 0
@@ -45,9 +45,8 @@ struct CaloriesBackSide: View {
                 ProgressBar(amount: $shared.calories, shared: shared).padding(.top, 10)
                 
                 Button {
-                    withAnimation {
-                        shared.flipCard()
-                    }
+//                    shared.getNutrients()
+                    isSheetPresented.toggle()
                 } label: {
                     ZStack {
                         Rectangle()
@@ -58,7 +57,9 @@ struct CaloriesBackSide: View {
                             .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
-                }.padding(.top, 15)
+                }.padding(.top, 15).sheet(isPresented: $isSheetPresented) {
+                    TabViewCaloriesAdd(viewModel: shared)
+                }
                 VStack {
                     HStack {
                         Text("Быстрое изменение ")
@@ -93,7 +94,10 @@ struct CaloriesBackSide: View {
                         .accentColor(.buttonColor)
                 }.padding(.top, 5)
             }
-        }.rotation3DEffect(Angle.degrees(degree), axis: (0,1,0), perspective: 0.3)
-            .opacity(keyboardResponder.keyboardIsShowing ? 0 : 1)
+        }
+//            .opacity(keyboardResponder.keyboardIsShowing ? 0 : 1)
     }
 }
+
+
+// https://api.edamam.com/api/nutrition-data?app_id=ee907db6&app_key=f2f5e16b5082a818510c5edebc08db67&ingr=100 g cucumber

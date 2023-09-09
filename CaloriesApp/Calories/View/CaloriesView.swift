@@ -39,12 +39,7 @@ struct MainCalories: View {
     
     var body: some View {
         ZStack {
-            CaloriesBackSide(keyboardResponder: keyboardResponder, degree: $shared.backDegree, shared: shared).opacity(shared.isFlipped ? 0 : 1)
-            CaloriesFrontSide(keyboardResponder: keyboardResponder, degree: $shared.frontDegree, shared: shared).opacity(!shared.isFlipped ? 0 : 1)
-        }.onChange(of: shared.isFlipped) { newValue in
-            print("flip")
-        }.onAppear {
-            shared.getStoredData()
+            CaloriesBackSide(shared: shared)
         }
     }
 }
