@@ -34,7 +34,7 @@ struct CaloriesAddView: View {
     @State private var yellowSize: CGSize = .zero
     @ObservedObject var viewModel: CaloriesViewModel
     @State var textFood: String = ""
-    @State var sizeFood: String = ""
+    @State var sizeFood: String = "100"
     @State var buttonTap: Bool = false
     var size = Size()
     var body: some View {
@@ -93,7 +93,8 @@ struct CaloriesAddView: View {
                 }
             }.padding(.top, 25)
             Button {
-                
+                viewModel.setFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
+                viewModel.addCalories(calorie: Int(viewModel.ccal) ?? 0)
             } label: {
                 ZStack {
                     Rectangle()

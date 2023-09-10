@@ -121,6 +121,8 @@ struct CaloriesAddYour: View {
             }.padding(.leading, 18).padding(.trailing, 18)
             Button {
 //                viewModel.getNutrients(texts: [textFood])
+                viewModel.setFood(food: [textFood, sizeFood, ccalFood])
+                viewModel.addCalories(calorie: Int(ccalFood) ?? 0)
             } label: {
                 ZStack {
                     Rectangle()

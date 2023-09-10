@@ -6,6 +6,34 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseFirestore
+import SwiftUI
+
+class ProgressModel: ObservableObject {
+    
+    
+    func getStoredData(docId: String, completion: @escaping ([String: [String]]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(docId)
+        
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let document = document, document.exists {
+                if let food = document.data()?["Food"] as? [String: [String]] {
+                    DispatchQueue.main.async {
+                        completion(food, nil)
+                    }
+                } else {
+                    completion(nil, nil) // or handle the absence of "CaloriesNow" as needed
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+}
 
 
 enum GraphPeriod: String {
@@ -18,4 +46,10 @@ enum SelectedView: String {
     case weightView = "Вес"
     case caloriesView = "Калории"
     case waterView = "Вода"
+}
+
+struct Food: Hashable {
+    var name: String
+    var size: String
+    var kcal: String
 }

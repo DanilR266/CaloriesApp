@@ -19,7 +19,7 @@ class CheckNewDay: ObservableObject {
     @AppStorage("year") var yearP = 2023 {
         willSet { objectWillChange.send() }
     }
-    @AppStorage("date") var date = "2023-07-31" {
+    @AppStorage("date") var date = "" {
         willSet { objectWillChange.send() }
     }
     

@@ -77,6 +77,10 @@ class CaloriesViewModel: ObservableObject {
         }
     }
     
+    func setFood(food: Array<String>) {
+        modelCalories.setFood(docId: docId, food: food)
+    }
+    
     func setData(number: Int) {
         modelCalories.setData(number: number, docId: docId)
     }

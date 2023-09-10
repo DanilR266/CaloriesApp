@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct ProgressCalories: View {
+    @ObservedObject var viewModel = ProgressViewModel()
     var body: some View {
         VStack {
             Text("Съедено сегодня")
                 .foregroundColor(.black)
                 .font(.system(size: 20, weight: .bold))
             ScrollView(.vertical) {
-                ForEach(arrayFood, id: \.self) { item in
-                    RectangleFood(name: item.name, sizeFood: item.size, kcal: item.kcal).padding(.bottom, 15)
+                ForEach(viewModel.arrayFood, id: \.self) { item in
+                    RectangleFood(name: item.name, sizeFood: item.size, kcal: item.kcal).padding(.bottom, 5)
                 }
             }
+        }
+        .onAppear {
+            viewModel.arrayFood = []
+            viewModel.getFood()
         }
     }
 }

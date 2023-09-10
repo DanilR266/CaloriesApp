@@ -93,7 +93,8 @@ class Authentication: ObservableObject {
                     "Sex": Sex.man.rawValue,
                     "CaloriesNow": 0,
                     "Max": "50",
-                    "Min": "50"
+                    "Min": "50",
+                    "Food": ["calories":["","",""]]
                 ]).getDocument { res, arg  in
                     self.docIdNow = res?.documentID ?? ""
                     self.docId = self.docIdNow
@@ -190,7 +191,8 @@ class Authentication: ObservableObject {
     func updateCalories() {
         let db = Firestore.firestore()
         db.collection("usersNew").document("\(docId)").updateData([
-            "CaloriesNow": 0
+            "CaloriesNow": 0,
+            "Food": ["calories": []]
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

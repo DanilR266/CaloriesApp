@@ -44,7 +44,21 @@ class ModelCalories: ObservableObject {
             }
         }
     }
-
+    
+    func setFood(docId: String, food: Array<String>) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(docId)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if var foodArray = document.data()?["Food"] as? [String:[String]] {
+                    foodArray["calories"]!.append(contentsOf: food)
+                    db.collection("usersNew").document("\(docId)").updateData([
+                        "Food": foodArray
+                    ])
+                }
+            }
+        }
+    }
 }
 
 enum TypeOfGoal: String {

@@ -20,6 +20,7 @@
 		7E4BD97E2A6E5EF100AB045E /* ViewQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD97D2A6E5EF100AB045E /* ViewQuestions.swift */; };
 		7E4BD9802A6E70D000AB045E /* AuthViewMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD97F2A6E70D000AB045E /* AuthViewMain.swift */; };
 		7E6176222A33325B00FEB4DD /* ScaleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6176212A33325B00FEB4DD /* ScaleScreen.swift */; };
+		7E649CB72AAC8BC600291F17 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 7E649CB62AAC8BC600291F17 /* CodeScanner */; };
 		7E68D0AF29F1BDEE00D0EE02 /* CaloriesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E68D0AE29F1BDEE00D0EE02 /* CaloriesAppApp.swift */; };
 		7E68D0B129F1BDEE00D0EE02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E68D0B029F1BDEE00D0EE02 /* ContentView.swift */; };
 		7E68D0B329F1BDEF00D0EE02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E68D0B229F1BDEF00D0EE02 /* Assets.xcassets */; };
@@ -142,6 +143,7 @@
 			files = (
 				7E702DC729F3BD2A005FD4AB /* FirebaseDatabase in Frameworks */,
 				7E801A9A29F958BD00AAB764 /* SlidingTabView in Frameworks */,
+				7E649CB72AAC8BC600291F17 /* CodeScanner in Frameworks */,
 				7E702DC929F3BD2A005FD4AB /* FirebaseFirestore in Frameworks */,
 				7E702DC329F3BD2A005FD4AB /* FirebaseAnalytics in Frameworks */,
 				7E702DC529F3BD2A005FD4AB /* FirebaseAuth in Frameworks */,
@@ -407,8 +409,8 @@
 		7EDBD37C2A65942700A8AF23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7E961BD32AA88D21006B1316 /* StructRequest.swift */,
 				7E39BBC32A4D902A00E017ED /* CaloriesModel.swift */,
+				7E961BD32AA88D21006B1316 /* StructRequest.swift */,
 				7E961BD52AA88D56006B1316 /* RequestFood.swift */,
 			);
 			path = Model;
@@ -475,6 +477,7 @@
 				7E702DC629F3BD2A005FD4AB /* FirebaseDatabase */,
 				7E702DC829F3BD2A005FD4AB /* FirebaseFirestore */,
 				7E801A9929F958BD00AAB764 /* SlidingTabView */,
+				7E649CB62AAC8BC600291F17 /* CodeScanner */,
 			);
 			productName = CaloriesApp;
 			productReference = 7E68D0AB29F1BDEE00D0EE02 /* CaloriesApp.app */;
@@ -511,6 +514,7 @@
 			packageReferences = (
 				7E702DC129F3BD2A005FD4AB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				7E801A9829F958BD00AAB764 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				7E649CB52AAC8BC600291F17 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 7E68D0AC29F1BDEE00D0EE02 /* Products */;
 			projectDirPath = "";
@@ -870,6 +874,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7E649CB52AAC8BC600291F17 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		7E702DC129F3BD2A005FD4AB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -893,6 +905,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E702DC129F3BD2A005FD4AB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		7E649CB62AAC8BC600291F17 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E649CB52AAC8BC600291F17 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 		7E702DC229F3BD2A005FD4AB /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

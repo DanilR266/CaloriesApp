@@ -16,13 +16,13 @@ struct MainScreenTabView: View {
         ZStack {
             TabView(selection: $selectedTab) {
                 SettingsMain().tabItem {
-                    Text("Калории")
+                    Text("Настройки")
                 }.tag(0)
                 MainScreen(authModel: authModel).tabItem {
-                    Text("Профиль")
+                    Text("Главная")
                 }.tag(1)
                 ProgressView().tabItem {
-                    Text("Вес")
+                    Text("Прогресс")
                 }.tag(2)
             }
         }

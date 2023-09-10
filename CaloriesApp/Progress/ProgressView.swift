@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProgressView: View {
     var size = Size()
-    @State var selectedView = SelectedView.weightView.rawValue
+    @State var selectedView = SelectedView.caloriesView.rawValue
     var body: some View {
         VStack {
             HStack {
@@ -68,7 +68,7 @@ struct ProgressView: View {
             } else if selectedView == SelectedView.caloriesView.rawValue {
                 ProgressCalories()
             }
-        }
+        }.padding(.top, 30)
     }
 }
 
