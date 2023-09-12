@@ -10,7 +10,7 @@ import SwiftUI
 struct CaloriesAddYour: View {
     @ObservedObject var viewModel: CaloriesViewModel
     @State var textFood: String = ""
-    @State var sizeFood: String = ""
+    @State var sizeFood: String = "100"
     @State var ccalFood: String = ""
     @State var bFood: String = ""
     @State var zFood: String = ""
@@ -19,7 +19,7 @@ struct CaloriesAddYour: View {
     var size = Size()
     var body: some View {
         VStack {
-            RectangleNutrients(viewModel: viewModel, height: $buttonTap, size: size)
+            RectangleNutrients(viewModel: viewModel, nameFood: textFood, ccalFood: ccalFood, size: size)
             Text("Добавить свое блюдо")
                 .font(.system(size: 24, weight: .bold))
                 .frame(width: size.scaleWidth(300))
@@ -120,8 +120,9 @@ struct CaloriesAddYour: View {
                 .frame(width: size.scaleWidth(87), height: size.scaleHeight(41))
             }.padding(.leading, 18).padding(.trailing, 18)
             Button {
-//                viewModel.getNutrients(texts: [textFood])
-                viewModel.setFood(food: [textFood, sizeFood, ccalFood])
+                let sizeTo100 = (Double(sizeFood) ?? 0)/100
+                let ccalSize = String(Int((Double(ccalFood) ?? 0) * sizeTo100))
+                viewModel.setFood(food: [textFood, sizeFood, ccalSize])
                 viewModel.addCalories(calorie: Int(ccalFood) ?? 0)
             } label: {
                 ZStack {

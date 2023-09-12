@@ -189,6 +189,7 @@ class Authentication: ObservableObject {
     }
     
     func updateCalories() {
+        print("update")
         let db = Firestore.firestore()
         db.collection("usersNew").document("\(docId)").updateData([
             "CaloriesNow": 0,

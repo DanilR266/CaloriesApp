@@ -33,6 +33,7 @@ class CheckNewDay: ObservableObject {
     }
 
     func check() -> Bool {
+        print("Check")
         let currentDate = Date()
         let formattedDate = formatDate(currentDate)
         if formattedDate != self.date {

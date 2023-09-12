@@ -20,42 +20,37 @@ class WeightViewModel: ObservableObject {
     @Published var weightMin = "0"
     @Published var weightMax = "0"
     
+    @Published var waist = "0"
+    
 //    @ObservedObject var shared: Authentication
 
     @AppStorage("goal") var goalStore = "50" {
         willSet { objectWillChange.send() }
     }
     
-    func getWeigth() -> String {
-        return String(self.weightStore)
-    }
-    
-    func getGoal() -> String {
-        return goalStore
-    }
-    
-    func textForDif(weight: String, goal: String) -> String {
-        let dif = abs((Double(weight) ?? 0) - (Double(goal) ?? 0))
-        return dif <= 0 ? "0" : String(format: "%.1f", dif)
-    }
-    func goodSize(text: String) -> CGFloat {
-        return text.count <= 4 ? 30 : 24
-    }
-    func buttonUpDown(plus: Bool, text: String) -> String {
-        var number = (Float(text) ?? 0)
-        if plus {
-            number += 0.05
+    func buttonUpDown(plus: Bool, text: String, type: Int) -> String {
+        if type == 0 {
+            var number = (Float(text) ?? 0)
+            if plus {
+                number += 0.05
+                weightStore = String(Double(String(format: "%.2f", number))!)
+                return String(format: "%.2f", number)
+            }
+            number -= 0.05
             weightStore = String(Double(String(format: "%.2f", number))!)
-            return String(format: "%.2f", number)
+            return number > 0 ? String(format: "%.2f", number) : "0"
         }
-        number -= 0.05
-        weightStore = String(Double(String(format: "%.2f", number))!)
-        return number > 0 ? String(format: "%.2f", number) : "0"
-    }
-    
-    func updateData(str: String, goal: String) {
-        weightStore = String(Double(str)!)
-        goalStore = goal
+        else {
+            var number = (Float(text) ?? 0)
+            if plus {
+                number += 0.5
+                waist = String(Double(String(format: "%.2f", number))!)
+                return String(format: "%.2f", number)
+            }
+            number -= 0.5
+            waist = String(Double(String(format: "%.2f", number))!)
+            return number > 0 ? String(format: "%.2f", number) : "0"
+        }
     }
     
     

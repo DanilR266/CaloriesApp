@@ -39,7 +39,7 @@ struct CaloriesAddView: View {
     var size = Size()
     var body: some View {
         VStack {
-            RectangleNutrients(viewModel: viewModel, height: $buttonTap, size: size)
+            RectangleNutrients(viewModel: viewModel, size: size)
             Text("Узнать калорийность блюда")
                 .font(.system(size: 24, weight: .bold))
                 .frame(width: size.scaleWidth(300))
@@ -79,7 +79,7 @@ struct CaloriesAddView: View {
             }
             .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
             Button {
-                viewModel.getNutrients(texts: [textFood])
+                viewModel.getNutrients(texts: [textFood], size: sizeFood)
             } label: {
                 ZStack {
                     Rectangle()
@@ -114,7 +114,12 @@ struct CaloriesAddView: View {
 
 struct RectangleNutrients: View {
     @ObservedObject var viewModel: CaloriesViewModel
-    @Binding var height: Bool
+    var nameFood: String?
+    var sizeFood: String?
+    var ccalFood: String?
+    var bfood: String?
+    var zfood: String?
+    var ufood: String?
     var size: Size
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -125,7 +130,7 @@ struct RectangleNutrients: View {
                 .cornerRadius(12)
                 .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
             VStack {
-                Text(viewModel.nameFood)
+                Text(nameFood ?? viewModel.nameFood)
                     .font(.system(size: 24, weight: .bold))
                     .frame(width: size.screenWidth())
                     .multilineTextAlignment(.center)
@@ -136,16 +141,16 @@ struct RectangleNutrients: View {
                             .strokeBorder(Color.buttonColor, lineWidth: 2)
                             .frame(width: size.scaleWidth(91), height: size.scaleWidth(91))
                             .foregroundColor(.fieldWeight)
-                        Text(viewModel.ccal)
+                        Text(ccalFood ?? viewModel.ccal)
                             .font(.system(size: 30, weight: .bold))
                             .foregroundColor(Color.buttonColor)
                             .frame(width: size.scaleWidth(91), height: size.scaleWidth(91))
                             .multilineTextAlignment(.center)
                     }
                     HStack(spacing: 16) {
-                        CircleNutrients(letter: "Б", text: viewModel.prot,percent: "25", size: size)
-                        CircleNutrients(letter: "Ж", text: viewModel.fat,percent: "25", size: size)
-                        CircleNutrients(letter: "У", text: viewModel.chocdf,percent: "25", size: size)
+                        CircleNutrients(letter: "Б", text: bfood ?? viewModel.prot, percent: "25", size: size)
+                        CircleNutrients(letter: "Ж", text: zfood ?? viewModel.fat, percent: "25", size: size)
+                        CircleNutrients(letter: "У", text: ufood ?? viewModel.chocdf, percent: "25", size: size)
                     }
                 }
             }.padding(.bottom, 20)

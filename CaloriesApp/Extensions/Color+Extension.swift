@@ -19,5 +19,6 @@ extension Color {
     static var fieldWater: Color { return Color(red: 245/255, green: 204/255, blue: 90/255) }
     static var plusButton: Color { return Color(red: 31/255, green: 190/255, blue: 245/255) }
     static var regButton: Color { return Color(red: 87/255, green: 89/255, blue: 101/255) }
+    static var tabbar: Color { return Color(red: 134/255, green: 141/255, blue: 153/255) }
     static var authButton: Color { return Color(red: 87/255, green: 89/255, blue: 101/255, opacity: 0.5) }
 }

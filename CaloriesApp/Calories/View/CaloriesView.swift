@@ -39,7 +39,9 @@ struct MainCalories: View {
     
     var body: some View {
         ZStack {
-            CaloriesBackSide(shared: shared)
+            CaloriesBackSide(amount: 3000, shared: shared).onAppear {
+                shared.getStoredData()
+            }
         }
     }
 }

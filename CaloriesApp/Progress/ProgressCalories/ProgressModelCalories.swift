@@ -26,6 +26,4 @@ class ProgressViewModel: ObservableObject {
             }
         }
     }
-    
-//    arrayFood = [Food(name: "Коктейль протеиновый", size: "100", kcal: "210"), Food(name: "Макароны", size: "200", kcal: "310")].self
 }

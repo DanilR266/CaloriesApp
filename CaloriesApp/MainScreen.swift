@@ -12,20 +12,28 @@ import Firebase
 struct MainScreenTabView: View {
     @StateObject var authModel: Authentication
     @State var selectedTab = 1
+    var size = Size()
     var body: some View {
         ZStack {
-            TabView(selection: $selectedTab) {
-                SettingsMain().tabItem {
-                    Text("Настройки")
-                }.tag(0)
-                MainScreen(authModel: authModel).tabItem {
-                    Text("Главная")
-                }.tag(1)
-                ProgressView().tabItem {
-                    Text("Прогресс")
-                }.tag(2)
+            Color.backgroundColor
+            VStack {
+                if selectedTab == 0 {
+                    SettingsProfile()
+                        .padding(.top, size.scaleHeight(70))
+                }
+                if selectedTab == 1 {
+                    MainScreen(authModel: authModel)
+                }
+                if selectedTab == 2 {
+                    ProgressView()
+                        .padding(.top, size.scaleHeight(40))
+                }
+                Spacer()
+                CustomTabBar(tabBarItem: $selectedTab)
+                    .frame(width: size.screenWidth(), height: size.scaleHeight(77))
+                    .foregroundColor(.tabbar)
             }
-        }
+        }.ignoresSafeArea()
     }
 }
 
@@ -87,7 +95,8 @@ struct MainScreen: View {
 
 
 //struct MainScreen_Previews: PreviewProvider {
+//    @StateObject var authModel = Authentication()
 //    static var previews: some View {
-//        MainScreen()
+//        MainScreen(authModel: authModel)
 //    }
 //}

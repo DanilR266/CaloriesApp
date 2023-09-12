@@ -17,7 +17,7 @@ class CaloriesViewModel: ObservableObject {
     @AppStorage("calories") var calories: Int = 0 {
         willSet { objectWillChange.send() }
     }
-    @AppStorage("CaloriesGoal") var caloriesGoal = 0 {
+    @AppStorage("CaloriesGoal") var caloriesGoal = 1000 {
         willSet { objectWillChange.send() }
     }
     @AppStorage("id") var docId = ""
@@ -37,16 +37,17 @@ class CaloriesViewModel: ObservableObject {
 
 
     
-    func getNutrients(texts: [String]) {
+    func getNutrients(texts: [String], size: String) {
         translate.translateText(texts: texts) { result in
             switch result {
             case .success(let translations):
                 self.foodRequest.fetchFoodData(ingredient: translations[0]) { value in
                     DispatchQueue.main.async {
-                        self.ccal = String(value?.enercKcal ?? 0)
-                        self.prot = String(value?.procnt ?? 0)
-                        self.fat = String(value?.fat ?? 0)
-                        self.chocdf = String(value?.chocdf ?? 0)
+                        var calSize = (Double(size) ?? 0)/100
+                        self.ccal = String(Int(Double(value?.enercKcal ?? 0)*calSize))
+                        self.prot = String(Int(Double(value?.procnt ?? 0)*calSize))
+                        self.fat = String(Int(Double(value?.fat ?? 0)*calSize))
+                        self.chocdf = String(Int(Double(value?.chocdf ?? 0)*calSize))
                         self.nameFood = texts[0]
                     }
                 }
@@ -73,6 +74,7 @@ class CaloriesViewModel: ObservableObject {
     
     func getStoredData() {
         modelCalories.getStoredData(docId: docId) { calories, error in
+            print(calories, "LLL")
             self.calories = calories ?? 0
         }
     }

@@ -47,7 +47,7 @@ struct SettingsProfile: View {
                             .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
-                }.padding(.top, size.scaleHeight(65))
+                }.padding(.top, size.scaleHeight(35))
                 Button {
                     viewModel.signOut()
                 } label: {
@@ -60,7 +60,7 @@ struct SettingsProfile: View {
                             .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
-                }.padding(.top, size.scaleHeight(65))
+                }.padding(.top, size.scaleHeight(15))
             }
             
         }
