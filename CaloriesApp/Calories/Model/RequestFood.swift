@@ -20,18 +20,15 @@ class RequestFood {
         urlComponents?.queryItems = queryItems
         
         guard let url = urlComponents?.url else {
-            print("error1")
             return
         }
         let session = URLSession.shared
         let task = session.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                print("error2")
                 return
             }
             
             guard let data = data else {
-                print("error 3")
                 return
             }
             do {
@@ -40,7 +37,7 @@ class RequestFood {
                     completion(goodsResponse.parsed?[0].food?.nutrients)
                 }
             } catch {
-                print("error4")
+
             }
         }
         

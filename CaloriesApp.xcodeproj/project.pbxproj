@@ -22,6 +22,7 @@
 		7E6176222A33325B00FEB4DD /* ScaleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6176212A33325B00FEB4DD /* ScaleScreen.swift */; };
 		7E649CB72AAC8BC600291F17 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 7E649CB62AAC8BC600291F17 /* CodeScanner */; };
 		7E649CBA2AAF3B6200291F17 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E649CB92AAF3B6200291F17 /* SwiftUIView.swift */; };
+		7E6533E02AFD0C260081747A /* SavedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6533DF2AFD0C260081747A /* SavedFood.swift */; };
 		7E68D0AF29F1BDEE00D0EE02 /* CaloriesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E68D0AE29F1BDEE00D0EE02 /* CaloriesAppApp.swift */; };
 		7E68D0B329F1BDEF00D0EE02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E68D0B229F1BDEF00D0EE02 /* Assets.xcassets */; };
 		7E68D0B629F1BDEF00D0EE02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E68D0B529F1BDEF00D0EE02 /* Preview Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		7EA24AB729F7E06C00B2B65B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24AB629F7E06C00B2B65B /* AuthModel.swift */; };
 		7EA24AB929F8566A00B2B65B /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24AB829F8566A00B2B65B /* MainScreen.swift */; };
 		7EA24ABB29F856DD00B2B65B /* StrokeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24ABA29F856DD00B2B65B /* StrokeTextView.swift */; };
+		7EAC6C2F2AF80A3F0021DECB /* WeightChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6C2E2AF80A3F0021DECB /* WeightChange.swift */; };
 		7EB436DD2A307E460052AA01 /* ViewModelWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436DC2A307E460052AA01 /* ViewModelWeight.swift */; };
 		7EB436E42A30EB7D0052AA01 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436E32A30EB7D0052AA01 /* ButtonViews.swift */; };
 		7EB436E62A30EBF30052AA01 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB436E52A30EBF30052AA01 /* WeightView.swift */; };
@@ -88,6 +90,7 @@
 		7E4BD97F2A6E70D000AB045E /* AuthViewMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewMain.swift; sourceTree = "<group>"; };
 		7E6176212A33325B00FEB4DD /* ScaleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleScreen.swift; sourceTree = "<group>"; };
 		7E649CB92AAF3B6200291F17 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		7E6533DF2AFD0C260081747A /* SavedFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFood.swift; sourceTree = "<group>"; };
 		7E68D0AB29F1BDEE00D0EE02 /* CaloriesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaloriesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E68D0AE29F1BDEE00D0EE02 /* CaloriesAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesAppApp.swift; sourceTree = "<group>"; };
 		7E68D0B229F1BDEF00D0EE02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 		7EA24AB629F7E06C00B2B65B /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		7EA24AB829F8566A00B2B65B /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		7EA24ABA29F856DD00B2B65B /* StrokeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeTextView.swift; sourceTree = "<group>"; };
+		7EAC6C2E2AF80A3F0021DECB /* WeightChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChange.swift; sourceTree = "<group>"; };
 		7EB436DC2A307E460052AA01 /* ViewModelWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelWeight.swift; sourceTree = "<group>"; };
 		7EB436E32A30EB7D0052AA01 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		7EB436E52A30EBF30052AA01 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				7EB436E52A30EBF30052AA01 /* WeightView.swift */,
+				7EAC6C2E2AF80A3F0021DECB /* WeightChange.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -404,6 +409,7 @@
 				7E39BBC72A50631800E017ED /* CaloriesBackSide.swift */,
 				7E961BD72AA89E99006B1316 /* CaloriesAddView.swift */,
 				7E72CE152AAA2E7E0063155D /* CaloriesAddYour.swift */,
+				7E6533DF2AFD0C260081747A /* SavedFood.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -574,6 +580,7 @@
 				7E6C98452A67CA8E00480C64 /* WaterViewModel.swift in Sources */,
 				7EA24AB929F8566A00B2B65B /* MainScreen.swift in Sources */,
 				7EDBD37A2A65941100A8AF23 /* CaloriesSettingsView.swift in Sources */,
+				7E6533E02AFD0C260081747A /* SavedFood.swift in Sources */,
 				7EB436E62A30EBF30052AA01 /* WeightView.swift in Sources */,
 				7EB436E42A30EB7D0052AA01 /* ButtonViews.swift in Sources */,
 				7E702DD129F3BF64005FD4AB /* AuthViewModel.swift in Sources */,
@@ -600,6 +607,7 @@
 				7E704C1A2A56AE8B009F37AC /* ModelSettings.swift in Sources */,
 				7E4BD9802A6E70D000AB045E /* AuthViewMain.swift in Sources */,
 				7ED2C5782A76257F00186473 /* ProgressView.swift in Sources */,
+				7EAC6C2F2AF80A3F0021DECB /* WeightChange.swift in Sources */,
 				7ED2C5832A77BB5D00186473 /* ProgressCalories.swift in Sources */,
 				7E6176222A33325B00FEB4DD /* ScaleScreen.swift in Sources */,
 				7EB436ED2A30EFB90052AA01 /* ModelWeight.swift in Sources */,
@@ -791,7 +799,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -824,7 +832,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -13,7 +13,7 @@ import SwiftUI
 class ProgressModel: ObservableObject {
     
     
-    func getStoredData(docId: String, completion: @escaping ([String: [String]]?, Error?) -> Void) {
+    func getStoredData(docId: String, completion: @escaping ([String]?, Error?) -> Void) {
         let db = Firestore.firestore()
         let docRef = db.collection("usersNew").document(docId)
         
@@ -21,7 +21,7 @@ class ProgressModel: ObservableObject {
             if let error = error {
                 completion(nil, error)
             } else if let document = document, document.exists {
-                if let food = document.data()?["Food"] as? [String: [String]] {
+                if let food = document.data()?["Food"] as? [String] {
                     DispatchQueue.main.async {
                         completion(food, nil)
                     }
@@ -52,4 +52,5 @@ struct Food: Hashable {
     var name: String
     var size: String
     var kcal: String
+    var id: String?
 }

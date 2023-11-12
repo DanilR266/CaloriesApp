@@ -17,9 +17,9 @@ class ProgressViewModel: ObservableObject {
         model.getStoredData(docId: docId) { value, error in
             DispatchQueue.main.async {
                 var i = 0
-                while i < value!["calories"]!.count {
-                    if value!["calories"]![i] != "" {
-                        self.arrayFood.append(Food(name: value!["calories"]![i], size: value!["calories"]![i+1], kcal: value!["calories"]![i+2]))
+                while i < value?.count ?? 0 {
+                    if value![i] != "" {
+                        self.arrayFood.append(Food(name: value![i], size: value![i+1], kcal: value![i+2]))
                     }
                     i += 3
                 }

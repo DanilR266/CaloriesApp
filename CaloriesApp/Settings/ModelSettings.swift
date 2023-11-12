@@ -8,19 +8,47 @@
 import FirebaseFirestore
 import Firebase
 
-class FirebaseService {
-    static let shared = FirebaseService()
+class ModelSettings {
     
     private let db = Firestore.firestore()
-
-    func updateUserName(docId: String, newName: String, completion: @escaping (Error?) -> Void) {
-        db.collection("usersNew").document(docId).updateData([
-            "firstname": newName
-        ]) { error in
+    
+    func getStoredData(docId: String, completion: @escaping (String?, String?, Int?) -> Void) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(docId)
+        
+        docRef.getDocument { (document, error) in
             if let error = error {
-                completion(error)
+                print("Error getting document: \(error)")
+                completion(nil, nil, nil)
+            } else if let document = document, document.exists {
+                if let weightGoal = document.data()?["WeightGoal"] as? String,
+                   let goalCalories = document.data()?["GoalCalories"] as? Int,
+                   let name = document.data()?["firstname"] as? String {
+                    DispatchQueue.main.async {
+                        completion(weightGoal, name, goalCalories)
+                    }
+                } else {
+                    print("Data is not in the expected format")
+                    completion(nil, nil, nil)
+                }
             } else {
-                completion(nil)
+                print("Document does not exist")
+                completion(nil, nil, nil)
+            }
+        }
+    }
+
+    func setData(calories: Int, name: String, weight: String, docId: String) {
+        let db = Firestore.firestore()
+        db.collection("usersNew").document("\(docId)").updateData([
+            "GoalCalories": calories,
+            "firstname": name,
+            "WeightGoal": weight
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
             }
         }
     }

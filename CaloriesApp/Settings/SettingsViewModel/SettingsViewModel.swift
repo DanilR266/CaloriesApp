@@ -14,17 +14,24 @@ class SettingsViewModel: ObservableObject {
     @AppStorage("name") var userName = "User"
     @AppStorage("id") var docId = ""
     @AppStorage("auth") var authenticated = true
+    @Published var name = ""
+    @Published var goalCalories = ""
+    @Published var goalWeight = ""
+    let modelSettings = ModelSettings()
     
-    func updateName(name: String, docId: String) {
-        FirebaseService.shared.updateUserName(docId: docId, newName: name) { error in
-            if let error = error {
-                print("Error updating name: \(error)")
-            } else {
-                print("Name updated successfully!")
-            }
+    func getStored() {
+        modelSettings.getStoredData(docId: docId) { weight, name, calories in
+            self.goalCalories = String(calories ?? 0)
+            self.goalWeight = weight ?? "0"
+            self.name = name ?? "User"
         }
     }
+    
+    func setData() {
+        modelSettings.setData(calories: Int(self.goalCalories) ?? 1500, name: self.name, weight: self.goalWeight, docId: self.docId)
+    }
+    
     func signOut() {
-        FirebaseService.shared.signOut(authenticated: &authenticated)
+        modelSettings.signOut(authenticated: &authenticated)
     }
 }

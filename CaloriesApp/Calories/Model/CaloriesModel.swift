@@ -12,20 +12,21 @@ import SwiftUI
 
 class ModelCalories: ObservableObject {
     
-    func getStoredData(docId: String, completion: @escaping (Int?, Error?) -> Void) {
+    func getStoredData(docId: String, completion: @escaping (Int?, Int?, Error?) -> Void) {
         let db = Firestore.firestore()
         let docRef = db.collection("usersNew").document(docId)
         
         docRef.getDocument { (document, error) in
             if let error = error {
-                completion(nil, error)
+                completion(nil, nil, error)
             } else if let document = document, document.exists {
-                if let calories = document.data()?["CaloriesNow"] as? Int {
+                if let calories = document.data()?["CaloriesNow"] as? Int,
+                   let goal = document.data()?["GoalCalories"] as? Int {
                     DispatchQueue.main.async {
-                        completion(calories, nil)
+                        completion(calories, goal, nil)
                     }
                 } else {
-                    completion(nil, nil) // or handle the absence of "CaloriesNow" as needed
+                    completion(nil, nil, nil) // or handle the absence of "CaloriesNow" as needed
                 }
             } else {
                 print("Document does not exist")
@@ -50,8 +51,8 @@ class ModelCalories: ObservableObject {
         let docRef = db.collection("usersNew").document(docId)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                if var foodArray = document.data()?["Food"] as? [String:[String]] {
-                    foodArray["calories"]!.append(contentsOf: food)
+                if var foodArray = document.data()?["Food"] as? [String] {
+                    foodArray.append(contentsOf: food)
                     db.collection("usersNew").document("\(docId)").updateData([
                         "Food": foodArray
                     ])
@@ -59,6 +60,49 @@ class ModelCalories: ObservableObject {
             }
         }
     }
+    func setMyFood(docId: String, food: Array<String>) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(docId)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if var foodArray = document.data()?["SavedFood"] as? [String] {
+                    foodArray.append(contentsOf: food)
+                    db.collection("usersNew").document("\(docId)").updateData([
+                        "SavedFood": foodArray
+                    ])
+                }
+            }
+        }
+    }
+    
+    func cleanMyFood(docId: String) {
+        let db = Firestore.firestore()
+        db.collection("usersNew").document("\(docId)").updateData([
+            "SavedFood": []
+        ])
+    }
+    
+    func getMyFood(docId: String, completion: @escaping ([String]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(docId)
+        
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let document = document, document.exists {
+                if let food = document.data()?["SavedFood"] as? [String] {
+                    DispatchQueue.main.async {
+                        completion(food, nil)
+                    }
+                } else {
+                    completion(nil, nil) // or handle the absence of "CaloriesNow" as needed
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
 }
 
 enum TypeOfGoal: String {

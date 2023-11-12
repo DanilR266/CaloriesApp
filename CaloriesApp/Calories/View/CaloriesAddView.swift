@@ -35,80 +35,120 @@ struct CaloriesAddView: View {
     @ObservedObject var viewModel: CaloriesViewModel
     @State var textFood: String = ""
     @State var sizeFood: String = "100"
-    @State var buttonTap: Bool = false
+//    @State var buttonTap: Bool = false
     var size = Size()
     var body: some View {
-        VStack {
-            RectangleNutrients(viewModel: viewModel, size: size)
-            Text("Узнать калорийность блюда")
-                .font(.system(size: 24, weight: .bold))
-                .frame(width: size.scaleWidth(300))
-                .multilineTextAlignment(.center)
-                .padding(.top, 38)
-            ZStack(alignment: .leading) {
-                Image(systemName: "magnifyingglass")
-                    .padding(.leading, 13)
-                TextField("Например: сыр", text: $textFood)
-                    .padding(.leading, 43)
-                    .font(.system(size: 24, weight: .regular))
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                        .inset(by: 1)
-                        .stroke(.black, lineWidth: 2)
-                    )
-            }
-            .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
-            .padding(.top, 10)
-            ZStack(alignment: .leading) {
-                Image(systemName: "magnifyingglass")
-                    .padding(.leading, 13)
-                TextField("Например: 100 г", text: $sizeFood)
-                    .padding(.leading, 43)
-                    .font(.system(size: 24, weight: .regular))
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                        .inset(by: 1)
-                        .stroke(.black, lineWidth: 2)
-                    )
-            }
-            .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
-            Button {
-                viewModel.getNutrients(texts: [textFood], size: sizeFood)
-            } label: {
+        ZStack {
+            Color.backgroundColor.ignoresSafeArea()
+            VStack {
+                HStack {
+                    Text("\(viewModel.nameFood)")
+                        .font(.system(size: 32, weight: .bold))
+                        .foregroundColor(.white)
+                    Button {
+                        viewModel.setMyFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .foregroundColor(Color.black)
+                                .shadow(color: .white.opacity(0.25), radius: 2, x: 0, y: 4)
+                                .frame(width: 60, height: 60)
+                            Image(systemName: "heart")
+                                .resizable()
+                                .foregroundColor(viewModel.ccal == "0" ? Color.fieldWeight.opacity(0.5) : Color.fieldWeight)
+                                .frame(width: size.scaleWidth(36), height: size.scaleHeight(36))
+                        }
+                    }.disabled(viewModel.ccal == "0")
+                }
+                .padding(.bottom, 40)
                 ZStack {
                     Rectangle()
-                        .frame(width: size.scaleWidth(241), height: size.scaleHeight(35))
-                        .cornerRadius(7)
-                        .foregroundColor(.regButton)
-                        .shadow(radius: 3, y: 4)
-                    Text("Рассчитать")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.clear)
+                        .frame(width: size.screenWidth(), height: size.screenHeight())
+                        .background(Color.field)
+                        .cornerRadius(24)
+                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                    VStack {
+                        RectangleNutrients(viewModel: viewModel, size: size)
+                        ZStack(alignment: .leading) {
+                            Image(systemName: "magnifyingglass")
+                                .padding(.leading, 13)
+                            TextField("Например: сыр", text: $textFood)
+                                .padding(.leading, 43)
+                                .font(.system(size: 24, weight: .regular))
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 6)
+                                    .inset(by: 1)
+                                    .stroke(.black, lineWidth: 2)
+                                )
+                        }
+                        .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
+                        .padding(.top, 10)
+                        ZStack(alignment: .leading) {
+                            Image(systemName: "magnifyingglass")
+                                .padding(.leading, 13)
+                            TextField("Например: 100 г", text: $sizeFood)
+                                .padding(.leading, 43)
+                                .font(.system(size: 24, weight: .regular))
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 6)
+                                    .inset(by: 1)
+                                    .stroke(.black, lineWidth: 2)
+                                )
+                        }
+                        .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
+                        HStack(spacing: 70) {
+                            Button {
+                                viewModel.getNutrients(texts: [textFood], size: sizeFood)
+                            } label: {
+                                VStack {
+                                    ZStack {
+                                        Circle()
+                                            .foregroundColor(Color.black)
+                                            .shadow(color: .white.opacity(0.25), radius: 2, x: 0, y: 4)
+                                            .frame(width: 60, height: 60)
+                                        Image("calculate")
+                                            .resizable()
+                                            .foregroundColor(Color.fieldWeight)
+                                            .frame(width: size.scaleWidth(36), height: size.scaleHeight(36))
+                                    }
+                                    Text("Рассчитать")
+                                        .font(.system(size: 20, weight: .regular))
+                                        .foregroundColor(.black)
+                                }
+                            }
+                            Button {
+                                viewModel.setFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
+                                viewModel.addCalories(calorie: Int(viewModel.ccal) ?? 0)
+                            } label: {
+                                VStack {
+                                    ZStack {
+                                        Circle()
+                                            .foregroundColor(Color.black)
+                                            .shadow(color: .white.opacity(0.25), radius: 2, x: 0, y: 4)
+                                            .frame(width: 60, height: 60)
+                                        Image(systemName: "checkmark")
+                                            .resizable()
+                                            .foregroundColor(Color.fieldWeight)
+                                            .frame(width: size.scaleWidth(36), height: size.scaleHeight(36))
+                                    }
+                                    Text("Добавить")
+                                        .font(.system(size: 20, weight: .regular))
+                                        .foregroundColor(.black)
+                                }
+                            }
+                        }.padding(.top, 35)
+                        Spacer()
+                    }
                 }
-            }.padding(.top, 25)
-            Button {
-                viewModel.setFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
-                viewModel.addCalories(calorie: Int(viewModel.ccal) ?? 0)
-            } label: {
-                ZStack {
-                    Rectangle()
-                        .frame(width: size.scaleWidth(241), height: size.scaleHeight(35))
-                        .cornerRadius(7)
-                        .foregroundColor(.regButton)
-                        .shadow(radius: 3, y: 4)
-                    Text("Добавить")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20, weight: .bold))
-                }
-            }
-            Spacer()
-        }
+            }.padding(.top, 300)
+        }.ignoresSafeArea()
     }
 }
 
@@ -125,16 +165,12 @@ struct RectangleNutrients: View {
         ZStack(alignment: .bottom) {
             Rectangle()
                 .foregroundColor(.clear)
-                .frame(width: size.screenWidth(), height: size.scaleHeight(217))
-                .background(Color.fieldCalories)
-                .cornerRadius(12)
-                .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                .frame(width: size.scaleWidth(358), height: size.scaleHeight(149))
+                .background(Color.white)
+                .cornerRadius(18)
+                .shadow(color: Color.fieldCalories.opacity(0.25), radius: 2, x: -2, y: -2)
+                .shadow(color: Color.fieldCalories.opacity(0.25), radius: 2, x: 3, y: 4)
             VStack {
-                Text(nameFood ?? viewModel.nameFood)
-                    .font(.system(size: 24, weight: .bold))
-                    .frame(width: size.screenWidth())
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 20)
                 HStack(spacing: 34) {
                     ZStack {
                         Circle()
@@ -154,7 +190,7 @@ struct RectangleNutrients: View {
                     }
                 }
             }.padding(.bottom, 20)
-        }
+        }.padding(.top, 22)
     }
 }
 
@@ -199,3 +235,4 @@ struct CaloriesAddView_Previews: PreviewProvider {
         TabViewCaloriesAdd(viewModel: CaloriesViewModel())
     }
 }
+

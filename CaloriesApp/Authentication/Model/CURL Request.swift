@@ -15,7 +15,6 @@ class CurlRequest: ObservableObject {
         willSet { objectWillChange.send() }
     }
     private func request(oAuthToken: String) {
-        print("O", oAuthToken)
         let url = URL(string: "https://iam.api.cloud.yandex.net/iam/v1/tokens")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -44,7 +43,7 @@ class CurlRequest: ObservableObject {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let iamToken = json["iamToken"] as? String {
                     self.curl = iamToken
-                    print("iAM получен")
+                    print("iAM получен", iamToken)
                 } else {
                     print("Не удалось извлечь IAM токен из ответа")
                 }
@@ -60,12 +59,9 @@ class CurlRequest: ObservableObject {
         let docRef = db.collection("OauthToken").document("BHuJ24WGeLfuSMbGMPZZ")
         docRef.getDocument { (document, error) in
             if error != nil {
-                print("Error")
             } else if let document = document, document.exists {
                 if let token = document.data()?["token"] as? String {
                     self.request(oAuthToken: token)
-                } else {
-                    print("Error 2")
                 }
             } else {
                 print("Document does not exist")

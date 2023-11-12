@@ -10,19 +10,20 @@ import SwiftUI
 struct SettingsMain: View {
     @State var selectedTab = 1
     var body: some View {
-        ZStack {
-            TabView(selection: $selectedTab) {
-                CaloriesSettingsView().tabItem {
-                    Text("Калории")
-                }.tag(0)
-                SettingsProfile().tabItem {
-                    Text("Профиль")
-                }.tag(1)
-                Text("3").tabItem {
-                    Text("Вес")
-                }.tag(2)
-            }
-        }
+        SettingsProfile()
+//        ZStack {
+//            TabView(selection: $selectedTab) {
+//                CaloriesSettingsView().tabItem {
+//                    Text("Калории")
+//                }.tag(0)
+//                SettingsProfile().tabItem {
+//                    Text("Профиль")
+//                }.tag(1)
+//                Text("3").tabItem {
+//                    Text("Вес")
+//                }.tag(2)
+//            }
+//        }
     }
 }
 

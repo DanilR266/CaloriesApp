@@ -233,7 +233,7 @@ struct ViewQuestions: View {
                     }
                     
                     Button {
-                        print(weightNow, type(of: weightNow))
+        
                         viewModel.login()
                         viewModel.setDataAfterRegistration(goalCal: selectedButton, activity: selectedActivity, age: age, height: height, weightNow: weightNow, weightGoal: weightGoal, sex: selectedSex)
 //                        viewModel.calorieCalculator(weight: weightNow, height: height, age: age, sex: selectedSex, goal: selectedButton, activity: selectedActivity)

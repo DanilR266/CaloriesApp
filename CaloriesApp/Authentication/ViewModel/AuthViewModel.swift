@@ -9,6 +9,9 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import SwiftUI
+import AVKit
+import AVFoundation
+
 
 class Authentication: ObservableObject {
     
@@ -44,7 +47,6 @@ class Authentication: ObservableObject {
     
     func login() {
         Auth.auth().signIn(withEmail: userEmail, password: userPassword) { (result, error) in
-            print(self.userEmail, self.userPassword)
             self.errorRegistration = error?.localizedDescription
             if error != nil {
                 self.badSignIn = true
@@ -52,6 +54,17 @@ class Authentication: ObservableObject {
                 self.getDataAfterLogin()
                 self.badSignIn = false
             }
+        }
+    }
+    
+    func signOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+          try
+            firebaseAuth.signOut()
+            self.authenticated.toggle()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
         }
     }
     
@@ -71,6 +84,27 @@ class Authentication: ObservableObject {
         }
     }
     
+    func getStoredData() {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(self.docId)
+        
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error getting document: \(error)")
+            } else if let document = document, document.exists {
+                if let name = document.data()?["firstname"] as? String {
+                    DispatchQueue.main.async {
+                        self.userName = name
+                    }
+                } else {
+                    print("Data is not in the expected format")
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
     func registration(email: String, password: String, name: String) {
         self.isLoading = true
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -78,29 +112,32 @@ class Authentication: ObservableObject {
                 self.errorRegistration = error.localizedDescription
             }
             else {
-                guard let _ = result else { return }
-                let db = Firestore.firestore()
-                db.collection("usersNew").addDocument(data: [
-                    "email": email,
-                    "firstname": name,
-                    "uid": result!.user.uid,
-                    "GoalCalories": "",
-                    "Activity": "",
-                    "Age": 0,
-                    "Height": 0,
-                    "WeightNow": "50",
-                    "WeightGoal": "50",
-                    "Sex": Sex.man.rawValue,
-                    "CaloriesNow": 0,
-                    "Max": "50",
-                    "Min": "50",
-                    "Food": ["calories":["","",""]]
-                ]).getDocument { res, arg  in
-                    self.docIdNow = res?.documentID ?? ""
-                    self.docId = self.docIdNow
+                DispatchQueue.main.async {
+                    guard let _ = result else { return }
+                    let db = Firestore.firestore()
+                    db.collection("usersNew").addDocument(data: [
+                        "email": email,
+                        "firstname": name,
+                        "uid": result!.user.uid,
+                        "GoalCalories": 1500,
+                        "Activity": "",
+                        "Age": 0,
+                        "Height": 0,
+                        "WeightNow": "50",
+                        "WeightGoal": "50",
+                        "Sex": Sex.man.rawValue,
+                        "CaloriesNow": 0,
+                        "Max": "50",
+                        "Min": "50",
+                        "Food": [],
+                        "SavedFood": []
+                    ]).getDocument { res, arg  in
+                        self.docIdNow = res?.documentID ?? ""
+                        self.docId = self.docIdNow
+                    }
+                    self.isLoading = false
+                    self.authenticated.toggle()
                 }
-                self.isLoading = false
-                self.goodRegistration = true
             }
         }
     }
@@ -155,7 +192,7 @@ class Authentication: ObservableObject {
     func setDataAfterRegistration(goalCal: String, activity: String, age: Int, height: Int, weightNow: String, weightGoal: String, sex: String) {
         let db = Firestore.firestore()
         db.collection("usersNew").document("\(docId)").updateData([
-            "GoalCalories": goalCal,
+            "GoalCalories": 1500,
             "Activity": activity,
             "Age": age,
             "Height": height,
@@ -174,11 +211,29 @@ class Authentication: ObservableObject {
         }
     }
     
-    func setData(str: String) {
+    func updateDataReg() {
         let db = Firestore.firestore()
-        print(docId, str)
+        db.collection("usersNew").document("\(docId)").setData([:])
+    }
+    
+//    func setData(str: String) {
+//        let db = Firestore.firestore()
+//        db.collection("usersNew").document("\(docId)").updateData([
+//            "wikis": str
+//        ]) { err in
+//            if let err = err {
+//                print("Error writing document: \(err)")
+//            } else {
+//                print("Document successfully written!")
+//            }
+//        }
+//    }
+    
+    func updateCalories() {
+        let db = Firestore.firestore()
         db.collection("usersNew").document("\(docId)").updateData([
-            "wikis": str
+            "CaloriesNow": 0,
+            "Food": []
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -187,19 +242,11 @@ class Authentication: ObservableObject {
             }
         }
     }
-    
-    func updateCalories() {
-        print("update")
-        let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
-            "CaloriesNow": 0,
-            "Food": ["calories": []]
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
+    let synthesizer = AVSpeechSynthesizer()
+    func speach() {
+        let utterance = AVSpeechUtterance(string: "Привет!")
+        utterance.voice = AVSpeechSynthesisVoice(language: "ru-RU")
+        utterance.rate = 0.52
+        self.synthesizer.speak(utterance)
     }
 }

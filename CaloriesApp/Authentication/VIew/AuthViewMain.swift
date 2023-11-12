@@ -11,7 +11,7 @@ struct AuthViewMain: View {
     @ObservedObject var viewModel: Authentication
     var body: some View {
         if viewModel.goodRegistration {
-            ViewQuestions(viewModel: viewModel).animation(.easeIn, value: viewModel.goodRegistration)
+            MainScreenTabView(authModel: viewModel)
         }
         else {
             AuthView(viewModel: viewModel)

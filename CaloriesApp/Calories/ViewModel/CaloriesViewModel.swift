@@ -22,8 +22,10 @@ class CaloriesViewModel: ObservableObject {
     }
     @AppStorage("id") var docId = ""
     
+    @Published var arrayMyFood: Array<Food> = []
     @Published var calForView: Int = 0
-    
+    @Published var lineWidth: CGFloat = 3
+    @Published var fillCircle: Double = 1
     @Published var ccal = "0"
     @Published var prot = "0"
     @Published var fat = "0"
@@ -43,7 +45,7 @@ class CaloriesViewModel: ObservableObject {
             case .success(let translations):
                 self.foodRequest.fetchFoodData(ingredient: translations[0]) { value in
                     DispatchQueue.main.async {
-                        var calSize = (Double(size) ?? 0)/100
+                        let calSize = (Double(size) ?? 0)/100
                         self.ccal = String(Int(Double(value?.enercKcal ?? 0)*calSize))
                         self.prot = String(Int(Double(value?.procnt ?? 0)*calSize))
                         self.fat = String(Int(Double(value?.fat ?? 0)*calSize))
@@ -52,6 +54,7 @@ class CaloriesViewModel: ObservableObject {
                     }
                 }
             case .failure(let error):
+                
                 print("Ошибка:", error)
             }
         }
@@ -69,22 +72,57 @@ class CaloriesViewModel: ObservableObject {
     
     func fastCahngeCalories(fastChange: Int) {
         self.calories = self.calories + fastChange >= 0  ? self.calories + fastChange : self.calories
+        withAnimation() {
+            self.fillCircle = 1 - self.percentNowGoal()
+        }
         self.setData(number: self.calories)
     }
     
     func getStoredData() {
-        modelCalories.getStoredData(docId: docId) { calories, error in
-            print(calories, "LLL")
+        modelCalories.getStoredData(docId: docId) { calories, goal, error in
             self.calories = calories ?? 0
+            self.caloriesGoal = goal ?? 1500
+            withAnimation(.linear(duration: 0.4)) {
+                self.fillCircle = 0
+                self.lineWidth = 8
+                withAnimation(.linear(duration: 0.6).delay(0.5)) {
+                    self.fillCircle = 1 - self.percentNowGoal()
+                    self.lineWidth = 3
+                }
+            }
         }
+    }
+    
+    private func percentNowGoal() -> Double {
+        return Double((self.caloriesGoal - self.calories)) / Double(self.caloriesGoal)
     }
     
     func setFood(food: Array<String>) {
         modelCalories.setFood(docId: docId, food: food)
     }
+    func setMyFood(food: Array<String>) {
+        modelCalories.setMyFood(docId: docId, food: food)
+    }
     
     func setData(number: Int) {
         modelCalories.setData(number: number, docId: docId)
+    }
+    func cleanMyFood() {
+        modelCalories.cleanMyFood(docId: docId)
+        arrayMyFood = []
+    }
+    func getMyFood() {
+        modelCalories.getMyFood(docId: docId) { value, error in
+            DispatchQueue.main.async {
+                var i = 0
+                while i < value?.count ?? 0 {
+                    if value![i] != "" {
+                        self.arrayMyFood.append(Food(name: value![i], size: value![i+1], kcal: value![i+2]))
+                    }
+                    i += 3
+                }
+            }
+        }
     }
     
     func calorieCalculator(weight: String, height: Int, age: Int, sex: String, goal: String, activity: String) -> Int {

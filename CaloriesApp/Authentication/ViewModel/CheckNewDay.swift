@@ -22,6 +22,7 @@ class CheckNewDay: ObservableObject {
     @AppStorage("date") var date = "" {
         willSet { objectWillChange.send() }
     }
+    @AppStorage("hourForToken") var tokenHour = "00"
     
     let dayComponent = Calendar.current.component(.day, from: Date())
     let monthComponent = Calendar.current.component(.month, from: Date())
@@ -33,7 +34,6 @@ class CheckNewDay: ObservableObject {
     }
 
     func check() -> Bool {
-        print("Check")
         let currentDate = Date()
         let formattedDate = formatDate(currentDate)
         if formattedDate != self.date {
@@ -43,6 +43,19 @@ class CheckNewDay: ObservableObject {
         updateComponents()
         return true
         
+    }
+    
+    func checkHour() -> Bool {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let formattedDate = dateFormatter.string(from: currentDate)
+        if abs(Int(formattedDate)! - Int(tokenHour)!) >= 3 {
+            self.tokenHour = formattedDate
+            return true
+        }
+        self.tokenHour = formattedDate
+        return false
     }
     
     func updateComponents() {
