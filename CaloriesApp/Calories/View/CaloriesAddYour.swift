@@ -5,6 +5,8 @@
 //  Created by Данила on 07.09.2023.
 //
 
+
+
 import SwiftUI
 
 struct CaloriesAddYour: View {
@@ -21,28 +23,11 @@ struct CaloriesAddYour: View {
         ZStack {
             Color.backgroundColor.ignoresSafeArea()
             VStack {
-                HStack {
-                    Text(textFood)
-                        .font(.system(size: 32, weight: .bold))
-                        .foregroundColor(.white)
-                        .lineLimit(2)
-                    Button {
-                        let sizeTo100 = (Double(sizeFood) ?? 0)/100
-                        let ccalSize = String(Int((Double(ccalFood) ?? 0) * sizeTo100))
-                        viewModel.setMyFood(food: [textFood, sizeFood, ccalSize])
-                    } label: {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(Color.black)
-                                .shadow(color: .white.opacity(0.25), radius: 2, x: 0, y: 4)
-                                .frame(width: 60, height: 60)
-                            Image(systemName: "heart")
-                                .resizable()
-                                .foregroundColor(textFood == "" ? Color.fieldWeight.opacity(0.5) : Color.fieldWeight)
-                                .frame(width: size.scaleWidth(36), height: size.scaleHeight(36))
-                        }
-                    }.disabled(textFood == "")
-                }.padding(.bottom, 40)
+                Text(textFood)
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundColor(.white)
+                    .lineLimit(2)
+                    .padding(.bottom, 40)
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
@@ -61,7 +46,7 @@ struct CaloriesAddYour: View {
                                 .foregroundColor(.clear)
                                 .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 6)
+                                    RoundedRectangle(cornerRadius: 15)
                                     .inset(by: 1)
                                     .stroke(.black, lineWidth: 2)
                                 )
@@ -76,7 +61,7 @@ struct CaloriesAddYour: View {
                                 .foregroundColor(.clear)
                                 .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 6)
+                                    RoundedRectangle(cornerRadius: 15)
                                     .inset(by: 1)
                                     .stroke(.black, lineWidth: 2)
                                 )
@@ -90,7 +75,7 @@ struct CaloriesAddYour: View {
                                 .foregroundColor(.clear)
                                 .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 6)
+                                    RoundedRectangle(cornerRadius: 15)
                                     .inset(by: 1)
                                     .stroke(.black, lineWidth: 2)
                                 )
@@ -106,7 +91,7 @@ struct CaloriesAddYour: View {
                                     .foregroundColor(.clear)
                                     .frame(width: size.scaleWidth(87), height: size.scaleHeight(41))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 6)
+                                        RoundedRectangle(cornerRadius: 15)
                                         .inset(by: 1)
                                         .stroke(.black, lineWidth: 2)
                                     )
@@ -122,7 +107,7 @@ struct CaloriesAddYour: View {
                                     .foregroundColor(.clear)
                                     .frame(width: size.scaleWidth(87), height: size.scaleHeight(41))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 6)
+                                        RoundedRectangle(cornerRadius: 15)
                                         .inset(by: 1)
                                         .stroke(.black, lineWidth: 2)
                                     )
@@ -139,34 +124,53 @@ struct CaloriesAddYour: View {
                                     .foregroundColor(.clear)
                                     .frame(width: size.scaleWidth(87), height: size.scaleHeight(41))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 6)
+                                        RoundedRectangle(cornerRadius: 15)
                                         .inset(by: 1)
                                         .stroke(.black, lineWidth: 2)
                                     )
                             }
                             .frame(width: size.scaleWidth(87), height: size.scaleHeight(41))
                         }.padding(.leading, 18).padding(.trailing, 18)
-                        Button {
-                            let sizeTo100 = (Double(sizeFood) ?? 0)/100
-                            let ccalSize = String(Int((Double(ccalFood) ?? 0) * sizeTo100))
-                            viewModel.setFood(food: [textFood, sizeFood, ccalSize])
-                            viewModel.addCalories(calorie: Int((Double(ccalFood) ?? 0) * sizeTo100))
-                        } label: {
-                            VStack {
+                        VStack(spacing: 17) {
+                            Button {
+                                let sizeTo100 = (Double(sizeFood) ?? 0)/100
+                                let ccalSize = String(Int((Double(ccalFood) ?? 0) * sizeTo100))
+                                viewModel.setFood(food: [textFood, sizeFood, ccalSize])
+                                viewModel.addCalories(calorie: Int((Double(ccalFood) ?? 0) * sizeTo100))
+//                                viewModel.testDate()
+                            } label: {
                                 ZStack {
-                                    Circle()
-                                        .foregroundColor(Color.black)
-                                        .shadow(color: .white.opacity(0.25), radius: 2, x: 0, y: 4)
-                                        .frame(width: 60, height: 60)
-                                    Image(systemName: "checkmark")
-                                        .resizable()
-                                        .foregroundColor(Color.fieldWeight)
-                                        .frame(width: size.scaleWidth(36), height: size.scaleHeight(36))
+                                    Rectangle()
+                                        .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                        .cornerRadius(25)
+                                        .foregroundColor(.backgroundColor)
+                                        .shadow(radius: 3, y: 4)
+                                    Text("Добавить")
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 20, weight: .bold))
                                 }
-                                Text("Добавить")
-                                    .font(.system(size: 20, weight: .regular))
-                                    .foregroundColor(.black)
                             }
+                            Button {
+                                if textFood != "Блюдо" {
+                                    let sizeTo100 = (Double(sizeFood) ?? 0)/100
+                                    let ccalSize = String(Int((Double(ccalFood) ?? 0) * sizeTo100))
+                                    viewModel.setMyFood(food: [textFood, sizeFood, ccalSize])
+                                }
+                            } label: {
+                                ZStack {
+                                    Rectangle()
+                                        .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                        .cornerRadius(25)
+                                        .foregroundColor(.backgroundColor)
+                                        .shadow(radius: 3, y: 4)
+                                    Text("В избранное")
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 20, weight: .bold))
+                                }
+                            }
+                            
                         }.padding(.top, 25)
                         Spacer()
                     }

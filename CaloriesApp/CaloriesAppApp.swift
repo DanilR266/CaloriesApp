@@ -36,10 +36,11 @@ struct CaloriesAppApp: App {
                             if !checkDay.check() {
                                 auth.updateCalories()
                             }
+                            CurlRequest().getOauthToken()
                             
-                            if checkDay.checkHour() {
-                                CurlRequest().getOauthToken()
-                            }
+//                            if checkDay.checkHour() {
+//                                CurlRequest().getOauthToken()
+//                            }
                         }
                 }
             }

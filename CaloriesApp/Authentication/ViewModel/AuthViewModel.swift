@@ -18,7 +18,7 @@ class Authentication: ObservableObject {
     public init() { }
     @Published var userEmail: String = ""
     @Published var userPassword: String = ""
-    @Published var regBool: Bool = false
+    @Published var regBool: Bool = true
     @Published private var isTextFieldFocused: Bool = false
     @Published var name: String = ""
     @Published var badSignIn = false
@@ -130,7 +130,8 @@ class Authentication: ObservableObject {
                         "Max": "50",
                         "Min": "50",
                         "Food": [],
-                        "SavedFood": []
+                        "SavedFood": [],
+                        "FoodDate": [:]
                     ]).getDocument { res, arg  in
                         self.docIdNow = res?.documentID ?? ""
                         self.docId = self.docIdNow
@@ -201,7 +202,8 @@ class Authentication: ObservableObject {
             "Sex": sex,
             "CaloriesNow": 0,
             "Max": weightNow,
-            "Min": weightNow
+            "Min": weightNow,
+            "FoodDate": [:]
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

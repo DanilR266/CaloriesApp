@@ -49,12 +49,14 @@ class ModelCalories: ObservableObject {
     func setFood(docId: String, food: Array<String>) {
         let db = Firestore.firestore()
         let docRef = db.collection("usersNew").document(docId)
+        let dateToday = dateToString()
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                if var foodArray = document.data()?["Food"] as? [String] {
-                    foodArray.append(contentsOf: food)
+                if var foodArray = document.data()?["FoodDate"] as? [String:[String]] {
+                    if foodArray[dateToday] == nil { foodArray[dateToday] = [] }
+                    foodArray[dateToday]?.append(contentsOf: food)
                     db.collection("usersNew").document("\(docId)").updateData([
-                        "Food": foodArray
+                        "FoodDate": foodArray
                     ])
                 }
             }
@@ -102,6 +104,36 @@ class ModelCalories: ObservableObject {
             }
         }
     }
+    
+    
+    func testDate(docId: String, num: Int) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("usersNew").document(docId)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if var foodArray = document.data()?["FoodDate"] as? [String:[String]] {
+                    foodArray["29.11.2023"]? = ["1", "2", "3"]
+                    foodArray["21.11.25"] = ["1", "2", "\(num)"]
+                    db.collection("usersNew").document("\(docId)").updateData([
+                        "FoodDate": foodArray
+                    ])
+                }
+            }
+        }
+    }
+    
+    
+    func dateToString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        let currentDate = Date()
+        let dateString = dateFormatter.string(from: currentDate)
+        
+        return dateString
+    }
+    
+    
     
 }
 

@@ -11,6 +11,8 @@ struct AuthView: View {
     @ObservedObject private var keyboardResponder = KeyboardResponder()
     @ObservedObject var viewModel: Authentication
     @State var offsetX: CGFloat = 500
+    @State var offsetRegistration: CGFloat = 0
+    @State var offsetLogIn: CGFloat = -500
     var size = Size()
     var body: some View {
         ZStack {
@@ -19,23 +21,18 @@ struct AuthView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: 212, height: 83)
-                    .offset(y: viewModel.regBool ? 70 : 0)
                     .animation(.spring(), value: viewModel.regBool)
-                    .padding(.top, 40)
+                    .padding(.bottom, 100)
                     .opacity(keyboardResponder.keyboardIsShowing ? 0 : 1)
-                VStack {
+                VStack(spacing: 15) {
                     VStack(alignment: .leading, spacing: 13) {
-                        Text("Логин")
-                            .font(.system(size: 36, weight: .regular))
-                            .padding(.leading, 24)
-                            .foregroundColor(.white)
                         ZStack(alignment: .center) {
                             Rectangle()
                                 .foregroundColor(.white)
                                 .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
-                                .cornerRadius(6)
+                                .cornerRadius(15)
                                 .overlay(
-                                RoundedRectangle(cornerRadius: 6)
+                                RoundedRectangle(cornerRadius: 15)
                                     .inset(by: 1)
                                     .stroke(.black, lineWidth: 2)
                                 )
@@ -50,19 +47,15 @@ struct AuthView: View {
                         }
                     }
                     VStack(alignment: .leading, spacing: 13) {
-                        Text("Пароль")
-                            .font(.system(size: 36, weight: .regular))
-                            .padding(.leading, 24)
-                            .foregroundColor(.white)
                         ZStack(alignment: .center) {
                             Rectangle()
                                 .foregroundColor(.white)
                                 .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
-                                .cornerRadius(6)
+                                .cornerRadius(15)
                                 .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .inset(by: 1)
-                                    .stroke(.black, lineWidth: 2)
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .inset(by: 1)
+                                        .stroke(.black, lineWidth: 2)
                                 )
                             HStack(spacing: 12) {
                                 Image(systemName: "lock")
@@ -73,130 +66,106 @@ struct AuthView: View {
                             }.padding(.leading, 24)
                         }
                     }
-                    if viewModel.regBool {
-                        VStack(alignment: .leading, spacing: 13) {
-                            Text("Имя")
-                                .font(.system(size: 36, weight: .regular))
-                                .padding(.leading, 24)
-                                .foregroundColor(.white)
-                            ZStack(alignment: .center) {
-                                Rectangle()
-                                    .foregroundColor(.white)
-                                    .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
-                                    .cornerRadius(6)
-                                    .overlay(
-                                    RoundedRectangle(cornerRadius: 6)
-                                        .inset(by: 1)
-                                        .stroke(.black, lineWidth: 2)
-                                    )
-                                HStack(spacing: 12) {
-                                    Image(systemName: "person")
-                                        .foregroundColor(.black)
-                                    TextField("Имя", text: $viewModel.userName)
-                                        .font(.system(size: 24, weight: .regular))
-                                }.padding(.leading, 24)
-                            }
-                        }
-                        VStack(spacing: 12) {
+                    ZStack(alignment: .top) {
+                        VStack() {
+                            VStack(alignment: .leading, spacing: 13) {
+                                ZStack(alignment: .center) {
+                                    Rectangle()
+                                        .foregroundColor(.white)
+                                        .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
+                                        .cornerRadius(15)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .inset(by: 1)
+                                                .stroke(.black, lineWidth: 2)
+                                        )
+                                    HStack(spacing: 12) {
+                                        Image(systemName: "person")
+                                            .foregroundColor(.black)
+                                        TextField("Имя", text: $viewModel.userName)
+                                            .font(.system(size: 24, weight: .regular))
+                                    }.padding(.leading, 24)
+                                }
+                            }.padding(.bottom, 28)
                             Button {
                                 DispatchQueue.main.async {
                                     viewModel.registration(email: viewModel.userEmail, password: viewModel.userPassword, name: viewModel.userName)
                                     viewModel.updateDataReg()
+                                    viewModel.userName = ""
                                 }
 
                                 viewModel.regBool = false
                             } label: {
                                 ZStack {
                                     Rectangle()
-                                        .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
-                                        .cornerRadius(7)
-                                        .foregroundColor(.regButton)
+                                        .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                        .cornerRadius(25)
+                                        .foregroundColor(.fieldWeight)
                                         .shadow(radius: 3, y: 4)
                                     Text("Регистрация")
-//                                        .frame(maxWidth: 150)
                                         .multilineTextAlignment(.center)
                                         .foregroundColor(.white)
                                         .font(.system(size: 20, weight: .bold))
-//                                        .offset(x: 62)
                                 }
                             }
+                            HStack {
+                                Text("Уже есть аккаунт?")
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundColor(.white)
+                                Button {
+                                    viewModel.regBool = false
+                                    withAnimation {
+                                        self.offsetRegistration = 500
+                                        self.offsetLogIn = 0
+                                    }
+                                } label: {
+                                    Text("Войти")
+                                        .font(.system(size: 16, weight: .bold))
+                                }
+
+                            }
+                        }.padding(.top, 0)
+                            .offset(x: offsetRegistration)
+                        
+                        VStack() {
                             Button {
-                                viewModel.regBool = false
+                                viewModel.login()
                             } label: {
-                                ZStack {
+                                ZStack(alignment: .center) {
                                     Rectangle()
-                                        .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
-                                        .cornerRadius(7)
-                                        .foregroundColor(.authButton)
+                                        .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                        .cornerRadius(25)
+                                        .foregroundColor(.fieldWeight)
                                         .shadow(radius: 3, y: 4)
-                                    Text("Вход")
-//                                        .frame(maxWidth: 100)
+                                    Text("Войти")
                                         .foregroundColor(.white)
                                         .font(.system(size: 20, weight: .bold))
-//                                        .offset(x: 25)
                                 }
+
+                            }.offset(x: -offsetX)
+                            HStack {
+                                Text("Хотите создать аккаунт?")
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundColor(.white)
+                                Button {
+                                    viewModel.regBool = true
+                                    withAnimation {
+                                        self.offsetRegistration = 0
+                                        self.offsetLogIn = -500
+                                    }
+                                } label: {
+                                    Text("Регистрация")
+                                        .font(.system(size: 16, weight: .bold))
+                                }
+
                             }
-                        }.padding(.top, 40)
+                        }.padding(.top, 28)
+                            .offset(x: offsetLogIn)
                     }
                 }
-                .offset(y: viewModel.regBool ? 70 : 0)
-                .animation(.spring(), value: viewModel.regBool)
-                VStack(spacing: 12) {
-                    Button {
-                        viewModel.login()
-                        
-                    } label: {
-                        ZStack(alignment: .center) {
-                            Rectangle()
-                                .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
-                                .cornerRadius(7)
-                                .foregroundColor(.authButton)
-                                .shadow(radius: 3, y: 4)
-                            Text("Войти")
-//                                .frame(maxWidth: size.scaleWidth(285))
-                                .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .bold))
-                        }
-                    }.offset(x: -offsetX)
-                    Button {
-                        viewModel.regBool = true
-//                        viewModel.speach()
-                    } label: {
-                        ZStack(alignment: .center) {
-                            Rectangle()
-                                .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
-                                .cornerRadius(7)
-                                .foregroundColor(.regButton)
-                                .shadow(radius: 3, y: 4)
-                            Text("Регистрация")
-//                                .frame(maxWidth: 150)
-                                .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .bold))
-                                .multilineTextAlignment(.center)
-//                                .offset(x: 62)
-                        }
-                    }.offset(x: offsetX)
-                }.padding(.top, 30)
-                    
-                    .offset(y: viewModel.regBool ? 500 : 0)
-                    .animation(.spring(), value: viewModel.regBool)
-                Text(viewModel.errorRegistration ?? "").offset(y: viewModel.regBool ? 500 : 0)
-                    .animation(.spring(), value: viewModel.regBool)
-                Text(viewModel.errorAuth ?? "").offset(y: viewModel.regBool ? 500 : 0)
-                    .animation(.spring(), value: viewModel.regBool)
-                ZStack {
-                    Image("Vector1-2")
-                        .resizable()
-                        .padding(.top, 60)
-                    Image("Vector2")
-                        .resizable()
-                        .padding(.top, 150)
-                }
-                .padding(.top, 50)
-                .ignoresSafeArea()
-                .offset(y: viewModel.regBool ? 500 : 0)
-                .animation(.spring(), value: viewModel.regBool)
-            }
+//                Text(viewModel.errorRegistration ?? "")
+//                Text(viewModel.errorAuth ?? "")
+            }.padding(.top, 0)
         }.onAppear {
             withAnimation {
                 self.offsetX = 0
@@ -222,3 +191,26 @@ struct AuthView_Previews: PreviewProvider {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+//                ZStack {
+//                    Image("Vector1-2")
+//                        .resizable()
+//                        .padding(.top, 60)
+//                    Image("Vector2")
+//                        .resizable()
+//                        .padding(.top, 150)
+//                }
+//                .padding(.top, 50)
+//                .ignoresSafeArea()
+////                .offset(y: viewModel.regBool ? 500 : 0)
+//                .animation(.spring(), value: viewModel.regBool)

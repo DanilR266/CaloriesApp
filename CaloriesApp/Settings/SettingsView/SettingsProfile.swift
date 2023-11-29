@@ -45,7 +45,7 @@ struct SettingsProfile: View {
                                     Text("Изменить фото")
                                         .foregroundColor(.black)
                                         .font(.system(size: 16, weight: .bold))
-                                }
+                                }.padding(.bottom, 5)
                             }
                             VStack {
                                 VStack {
@@ -54,14 +54,14 @@ struct SettingsProfile: View {
                                         .font(.system(size: 16, weight: .bold))
                                         .frame(width: size.scaleWidth(339), alignment: .leading)
                                     ZStack(alignment: .leading) {
-                                        TextField("Например: сыр", text: $viewModel.name)
+                                        TextField("\(viewModel.name)", text: $viewModel.name)
                                             .padding(.leading, 13)
                                             .font(.system(size: 24, weight: .regular))
                                         Rectangle()
                                             .foregroundColor(.clear)
                                             .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
                                             .overlay(
-                                                RoundedRectangle(cornerRadius: 6)
+                                                RoundedRectangle(cornerRadius: 15)
                                                     .inset(by: 1)
                                                     .stroke(.black, lineWidth: 2)
                                             )
@@ -80,7 +80,7 @@ struct SettingsProfile: View {
                                             .foregroundColor(.clear)
                                             .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
                                             .overlay(
-                                                RoundedRectangle(cornerRadius: 6)
+                                                RoundedRectangle(cornerRadius: 15)
                                                     .inset(by: 1)
                                                     .stroke(.black, lineWidth: 2)
                                             )
@@ -99,7 +99,7 @@ struct SettingsProfile: View {
                                             .foregroundColor(.clear)
                                             .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
                                             .overlay(
-                                                RoundedRectangle(cornerRadius: 6)
+                                                RoundedRectangle(cornerRadius: 15)
                                                     .inset(by: 1)
                                                     .stroke(.black, lineWidth: 2)
                                             )
@@ -110,31 +110,31 @@ struct SettingsProfile: View {
                                 Button {
                                     viewModel.setData()
                                 } label: {
-                                    ZStack(alignment: .center) {
+                                    ZStack {
                                         Rectangle()
-                                            .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
-                                            .cornerRadius(7)
-                                            .foregroundColor(.regButton)
+                                            .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                            .cornerRadius(25)
+                                            .foregroundColor(.backgroundColor)
                                             .shadow(radius: 3, y: 4)
                                         Text("Сохранить")
+                                            .multilineTextAlignment(.center)
                                             .foregroundColor(.white)
                                             .font(.system(size: 20, weight: .bold))
-                                            .multilineTextAlignment(.center)
                                     }
                                 }
                                 Button {
                                     viewModel.signOut()
                                 } label: {
-                                    ZStack(alignment: .center) {
+                                    ZStack {
                                         Rectangle()
-                                            .frame(width: size.scaleWidth(285), height: size.scaleHeight(35))
-                                            .cornerRadius(7)
-                                            .foregroundColor(.regButton)
+                                            .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                            .cornerRadius(25)
+                                            .foregroundColor(.backgroundColor)
                                             .shadow(radius: 3, y: 4)
                                         Text("Выйти")
+                                            .multilineTextAlignment(.center)
                                             .foregroundColor(.white)
                                             .font(.system(size: 20, weight: .bold))
-                                            .multilineTextAlignment(.center)
                                     }
                                 }
                             }.padding(.top, size.scaleHeight(20))

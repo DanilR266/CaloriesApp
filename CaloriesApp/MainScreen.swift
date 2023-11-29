@@ -91,9 +91,15 @@ struct MainView: View {
                                     .foregroundColor(.white)
                             }
                             Spacer()
-                            Circle()
-                                .foregroundColor(.black)
-                                .frame(width: 64, height: 64)
+                            Image("ava")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: size.scaleWidth(64), height: size.scaleHeight(64))
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.black, lineWidth: 2)
+                                )
                         }.padding(.trailing, 40).padding(.leading, 40)
                         ZStack(alignment: .top) {
                             Rectangle()

@@ -13,7 +13,7 @@ import SwiftUI
 class ProgressModel: ObservableObject {
     
     
-    func getStoredData(docId: String, completion: @escaping ([String]?, Error?) -> Void) {
+    func getStoredData(docId: String, date: Date, completion: @escaping ([String]?, Error?) -> Void) {
         let db = Firestore.firestore()
         let docRef = db.collection("usersNew").document(docId)
         
@@ -21,9 +21,9 @@ class ProgressModel: ObservableObject {
             if let error = error {
                 completion(nil, error)
             } else if let document = document, document.exists {
-                if let food = document.data()?["Food"] as? [String] {
+                if let food = document.data()?["FoodDate"] as? [String: [String]] {
                     DispatchQueue.main.async {
-                        completion(food, nil)
+                        completion(food[self.dateToString(date: date)], nil)
                     }
                 } else {
                     completion(nil, nil) // or handle the absence of "CaloriesNow" as needed
@@ -32,6 +32,15 @@ class ProgressModel: ObservableObject {
                 print("Document does not exist")
             }
         }
+    }
+    func dateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        let currentDate = date
+        let dateString = dateFormatter.string(from: currentDate)
+        
+        return dateString
     }
 }
 

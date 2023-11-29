@@ -92,6 +92,9 @@ class CaloriesViewModel: ObservableObject {
             }
         }
     }
+    func testDate() {
+        modelCalories.testDate(docId: docId, num: 5)
+    }
     
     private func percentNowGoal() -> Double {
         return Double((self.caloriesGoal - self.calories)) / Double(self.caloriesGoal)

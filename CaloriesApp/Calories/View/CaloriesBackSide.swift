@@ -120,6 +120,7 @@ struct CaloriesBackSide: View {
                                             if value == false {
                                                 withAnimation {
                                                     shared.fastCahngeCalories(fastChange: Int(fastChange))
+                                                    shared.setFood(food: ["Быстрое изменение", "0", "\(Int(fastChange))"])
                                                 }
                                             }
                                             withAnimation {

@@ -186,8 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				7ED2C57B2A76265D00186473 /* ProgressModel.swift */,
-				7ED2C5822A77BB5D00186473 /* ProgressCalories.swift */,
 				7ED2C5842A77BBC300186473 /* ProgressModelCalories.swift */,
+				7ED2C5822A77BB5D00186473 /* ProgressCalories.swift */,
 			);
 			path = ProgressCalories;
 			sourceTree = "<group>";

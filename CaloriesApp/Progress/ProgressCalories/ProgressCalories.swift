@@ -12,9 +12,24 @@ struct ProgressCalories: View {
     var size = Size()
     var body: some View {
         VStack {
-            Text("Съедено сегодня")
-                .foregroundColor(.black)
-                .font(.system(size: 20, weight: .bold))
+            HStack(spacing: 5) {
+                DatePicker("", selection: $viewModel.selectedDate, displayedComponents: [.date] )
+                    .foregroundColor(.blue)
+                    .frame(width: 80)
+                    
+//                Button {
+//
+//                } label: {
+//                    HStack {
+//                        Text("сегодня")
+//                            .font(.system(size: 20, weight: .bold))
+//                        Image(systemName: "calendar")
+//                            .resizable()
+//                            .frame(width: size.scaleWidth(15), height: size.scaleHeight(15))
+//                    }
+//                }
+            }
+            ProgressBar(start: viewModel.startccal, end: viewModel.caloriesGoal, widthSecond: viewModel.widthSecond(), size: size)
             ScrollView(.vertical) {
                 Rectangle()
                     .foregroundColor(Color.white)
@@ -26,7 +41,7 @@ struct ProgressCalories: View {
         }
         .onAppear {
             viewModel.arrayFood = []
-            viewModel.getFood()
+            viewModel.getFood(date: viewModel.selectedDate)
         }
     }
 }
@@ -83,5 +98,34 @@ struct RectangleFood: View {
 struct ProgressCalories_Previews: PreviewProvider {
     static var previews: some View {
         ProgressCalories()
+    }
+}
+
+
+struct ProgressBar: View {
+    var start: Int
+    var end: Int
+    var widthSecond: Int
+    var size: Size
+    var body: some View {
+        VStack {
+            HStack {
+                Text("\(start)")
+                    .font(.system(size: 20, weight: .medium))
+                Spacer()
+                Text("\(end)")
+                    .font(.system(size: 20, weight: .medium))
+            }.frame(width: size.scaleWidth(340))
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .cornerRadius(15)
+                    .foregroundColor(.backgroundColor)
+                    .frame(width: size.scaleWidth(340), height: size.scaleHeight(20))
+                Rectangle()
+                    .cornerRadius(15)
+                    .foregroundColor(.fieldWeight)
+                    .frame(width: size.scaleWidth(CGFloat(widthSecond)), height: size.scaleHeight(20))
+            }
+        }
     }
 }
