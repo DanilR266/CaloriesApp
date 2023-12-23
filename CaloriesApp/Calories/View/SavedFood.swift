@@ -87,10 +87,7 @@ struct RectangleMyFood: View {
                 }
                 Spacer()
                 Button {
-                    let sizeTo100 = (Double(sizeFood) ?? 0)/100
-                    let ccalSize = String(Int((Double(kcal) ?? 0) * sizeTo100))
-                    viewModel.setFood(food: [name, sizeFood, ccalSize])
-
+                    viewModel.setFood(food: [name, sizeFood, kcal])
                     viewModel.addCalories(calorie: Int(kcal) ?? 0)
                 } label: {
                     ZStack {

@@ -175,9 +175,9 @@
 		7E45C1C82AA4B9A100E011E7 /* ProgressWeight */ = {
 			isa = PBXGroup;
 			children = (
+				7E45C1CA2AA4B9F400E011E7 /* ProgressWeightModel.swift */,
 				7ED2C5802A777C9E00186473 /* ProgressWeightViewModel.swift */,
 				7ED2C5792A76259100186473 /* ProgressWeight.swift */,
-				7E45C1CA2AA4B9F400E011E7 /* ProgressWeightModel.swift */,
 			);
 			path = ProgressWeight;
 			sourceTree = "<group>";

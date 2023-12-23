@@ -44,6 +44,18 @@ class ModelCalories: ObservableObject {
                 print("Document successfully written!")
             }
         }
+        let docRef = db.collection("usersNew").document(docId)
+        let dateToday = dateToString()
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if var caloriesDate = document.data()?["CaloriesDate"] as? [String:String] {
+                    caloriesDate[dateToday] = String(number)
+                    db.collection("usersNew").document("\(docId)").updateData([
+                        "CaloriesDate": caloriesDate
+                    ])
+                }
+            }
+        }
     }
     
     func setFood(docId: String, food: Array<String>) {

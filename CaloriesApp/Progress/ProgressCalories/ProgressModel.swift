@@ -61,5 +61,5 @@ struct Food: Hashable {
     var name: String
     var size: String
     var kcal: String
-    var id: String?
+    var id = UUID()
 }

@@ -110,6 +110,27 @@ class WeightViewModel: ObservableObject {
                 print("Document successfully written!")
             }
         }
+        let docRef = db.collection("usersNew").document(docId)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if var weightDate = document.data()?["WeightDate"] as? [String:String] {
+                    weightDate[self.dateToString(date: Date())] = self.weightStore
+                    db.collection("usersNew").document("\(self.docId)").updateData([
+                        "WeightDate": weightDate
+                    ])
+                }
+            }
+        }
+    }
+    
+    func dateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        let currentDate = date
+        let dateString = dateFormatter.string(from: currentDate)
+        
+        return dateString
     }
     
 }

@@ -12,24 +12,25 @@ struct ProgressCalories: View {
     var size = Size()
     var body: some View {
         VStack {
-            HStack(spacing: 5) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("В этот день")
+                        .font(.system(size: 20, weight: .medium))
+                    HStack {
+                        Text("\(viewModel.startccal)")
+                            .font(.system(size: 20, weight: .bold))
+                        Text("ккал")
+                            .font(.system(size: 20, weight: .medium))
+                    }
+                }
+                Spacer()
                 DatePicker("", selection: $viewModel.selectedDate, displayedComponents: [.date] )
                     .foregroundColor(.blue)
                     .frame(width: 80)
-                    
-//                Button {
-//
-//                } label: {
-//                    HStack {
-//                        Text("сегодня")
-//                            .font(.system(size: 20, weight: .bold))
-//                        Image(systemName: "calendar")
-//                            .resizable()
-//                            .frame(width: size.scaleWidth(15), height: size.scaleHeight(15))
-//                    }
-//                }
-            }
-            ProgressBar(start: viewModel.startccal, end: viewModel.caloriesGoal, widthSecond: viewModel.widthSecond(), size: size)
+                    .padding(.trailing, size.scaleWidth(22))
+            }.padding(.leading, size.scaleWidth(22))
+                .padding(.trailing, size.scaleWidth(22))
+//            ProgressBar(start: viewModel.startccal, end: viewModel.caloriesGoal, widthSecond: viewModel.widthSecond(), size: size)
             ScrollView(.vertical) {
                 Rectangle()
                     .foregroundColor(Color.white)
@@ -72,8 +73,9 @@ struct RectangleFood: View {
                         HStack(spacing: 5) {
                             Text(sizeFood)
                                 .font(.system(size: 20, weight: .medium))
-                            Text("g")
+                            Text(sizeFood == "Порция" ? "" : "g")
                                 .font(.system(size: 20, weight: .medium))
+                                
                         }
                     }
                     HStack {
@@ -95,11 +97,11 @@ struct RectangleFood: View {
 
 
 
-struct ProgressCalories_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressCalories()
-    }
-}
+//struct ProgressCalories_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProgressCalories()
+//    }
+//}
 
 
 struct ProgressBar: View {

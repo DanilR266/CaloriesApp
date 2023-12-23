@@ -24,3 +24,5 @@ struct AuthViewMain_Previews: PreviewProvider {
         AuthViewMain(viewModel: Authentication())
     }
 }
+
+

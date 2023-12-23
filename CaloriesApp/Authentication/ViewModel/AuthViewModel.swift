@@ -129,9 +129,11 @@ class Authentication: ObservableObject {
                         "CaloriesNow": 0,
                         "Max": "50",
                         "Min": "50",
-                        "Food": [],
+//                        "Food": [],
                         "SavedFood": [],
-                        "FoodDate": [:]
+                        "FoodDate": [:],
+                        "WeightDate": [:],
+                        "CaloriesDate": [:]
                     ]).getDocument { res, arg  in
                         self.docIdNow = res?.documentID ?? ""
                         self.docId = self.docIdNow
@@ -203,7 +205,9 @@ class Authentication: ObservableObject {
             "CaloriesNow": 0,
             "Max": weightNow,
             "Min": weightNow,
-            "FoodDate": [:]
+            "FoodDate": [:],
+            "WeightDate": [:],
+            "CaloriesDate": [:]
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

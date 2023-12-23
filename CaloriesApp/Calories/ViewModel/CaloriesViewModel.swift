@@ -36,6 +36,8 @@ class CaloriesViewModel: ObservableObject {
     @Published var selectedActivity: String = Activity.no.rawValue
     @Published var age: Int = 1
     @Published var height: Int = 170
+    
+    @State var selected = 1
 
 
     

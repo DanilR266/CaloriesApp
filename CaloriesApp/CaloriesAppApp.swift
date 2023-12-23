@@ -29,9 +29,9 @@ struct CaloriesAppApp: App {
             NavigationView {
 //                AuthViewMain(viewModel: auth)
                 if !auth.authenticated {
-                    AuthViewMain(viewModel: auth)
+                    AuthViewMain(viewModel: auth).preferredColorScheme(.light)
                 } else {
-                    MainScreenTabView(authModel: auth)
+                    MainScreenTabView(authModel: auth).preferredColorScheme(.light)
                         .onAppear {
                             if !checkDay.check() {
                                 auth.updateCalories()
