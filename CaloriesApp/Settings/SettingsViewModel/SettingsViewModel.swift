@@ -13,7 +13,7 @@ import SwiftUI
 class SettingsViewModel: ObservableObject {
     @AppStorage("name") var userName = "User"
     @AppStorage("id") var docId = ""
-    @AppStorage("auth") var authenticated = true
+
     @Published var name = ""
     @Published var goalCalories = ""
     @Published var goalWeight = ""
@@ -32,6 +32,6 @@ class SettingsViewModel: ObservableObject {
     }
     
     func signOut() {
-        modelSettings.signOut(authenticated: &authenticated)
+        modelSettings.signOut()
     }
 }

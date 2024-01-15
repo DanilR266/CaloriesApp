@@ -15,7 +15,7 @@ class ProgressModel: ObservableObject {
     
     func getStoredData(docId: String, date: Date, completion: @escaping ([String]?, Error?) -> Void) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         
         docRef.getDocument { (document, error) in
             if let error = error {

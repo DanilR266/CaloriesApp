@@ -21,6 +21,7 @@ struct CaloriesBackSide: View {
             impactFeedbackgenerator.impactOccurred()
         }
     }
+    
     @State var valueFast: Int = 0
     @ObservedObject var shared: CaloriesViewModel
     var body: some View {
@@ -136,7 +137,7 @@ struct CaloriesBackSide: View {
                                         .foregroundColor(Color.field)
                                         .frame(width: size.screenWidth(), height: 1)
                                     NavigationLink {
-                                        CaloriesAddView(viewModel: shared)
+                                        CaloriesAddView(viewModel: shared).swipeToGoBack()
                                         //                                    WeightChange()
                                     } label: {
                                         ZStack() {
@@ -160,7 +161,7 @@ struct CaloriesBackSide: View {
                                         }
                                     }
                                     NavigationLink {
-                                        CaloriesAddYour(viewModel: shared)
+                                        CaloriesAddYour(viewModel: shared).swipeToGoBack()
                                     } label: {
                                         ZStack() {
                                             Rectangle()

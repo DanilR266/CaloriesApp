@@ -70,7 +70,7 @@ class Authentication: ObservableObject {
     
     func getDataAfterLogin() {
         let db = Firestore.firestore()
-        db.collection("usersNew").whereField("email", isEqualTo: userEmail)
+        db.collection("Main").whereField("email", isEqualTo: userEmail)
             .getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -86,7 +86,7 @@ class Authentication: ObservableObject {
     
     func getStoredData() {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(self.docId)
+        let docRef = db.collection("Main").document(self.docId)
         
         docRef.getDocument { (document, error) in
             if let error = error {
@@ -115,7 +115,7 @@ class Authentication: ObservableObject {
                 DispatchQueue.main.async {
                     guard let _ = result else { return }
                     let db = Firestore.firestore()
-                    db.collection("usersNew").addDocument(data: [
+                    db.collection("Main").addDocument(data: [
                         "email": email,
                         "firstname": name,
                         "uid": result!.user.uid,
@@ -129,7 +129,6 @@ class Authentication: ObservableObject {
                         "CaloriesNow": 0,
                         "Max": "50",
                         "Min": "50",
-//                        "Food": [],
                         "SavedFood": [],
                         "FoodDate": [:],
                         "WeightDate": [:],
@@ -194,7 +193,7 @@ class Authentication: ObservableObject {
     
     func setDataAfterRegistration(goalCal: String, activity: String, age: Int, height: Int, weightNow: String, weightGoal: String, sex: String) {
         let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
+        db.collection("Main").document("\(docId)").updateData([
             "GoalCalories": 1500,
             "Activity": activity,
             "Age": age,
@@ -219,25 +218,12 @@ class Authentication: ObservableObject {
     
     func updateDataReg() {
         let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").setData([:])
+        db.collection("Main").document("\(docId)").setData([:])
     }
-    
-//    func setData(str: String) {
-//        let db = Firestore.firestore()
-//        db.collection("usersNew").document("\(docId)").updateData([
-//            "wikis": str
-//        ]) { err in
-//            if let err = err {
-//                print("Error writing document: \(err)")
-//            } else {
-//                print("Document successfully written!")
-//            }
-//        }
-//    }
     
     func updateCalories() {
         let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
+        db.collection("Main").document("\(docId)").updateData([
             "CaloriesNow": 0,
             "Food": []
         ]) { err in
@@ -248,6 +234,7 @@ class Authentication: ObservableObject {
             }
         }
     }
+    
     let synthesizer = AVSpeechSynthesizer()
     func speach() {
         let utterance = AVSpeechUtterance(string: "Привет!")

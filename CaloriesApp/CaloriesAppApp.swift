@@ -26,23 +26,21 @@ struct CaloriesAppApp: App {
     @StateObject var checkDay = CheckNewDay()
     var body: some Scene {
         WindowGroup {
-            NavigationView {
 //                AuthViewMain(viewModel: auth)
-                if !auth.authenticated {
-                    AuthViewMain(viewModel: auth).preferredColorScheme(.light)
-                } else {
-                    MainScreenTabView(authModel: auth).preferredColorScheme(.light)
-                        .onAppear {
-                            if !checkDay.check() {
-                                auth.updateCalories()
-                            }
-                            CurlRequest().getOauthToken()
-                            
+            if !auth.authenticated {
+                AuthViewMain(viewModel: auth).preferredColorScheme(.light)
+            } else {
+                MainScreenTabView(authModel: auth).preferredColorScheme(.light)
+                    .onAppear {
+                        if !checkDay.check() {
+                            auth.updateCalories()
+                        }
+                        CurlRequest().getOauthToken()
+                        
 //                            if checkDay.checkHour() {
 //                                CurlRequest().getOauthToken()
 //                            }
-                        }
-                }
+                    }
             }
         }
     }

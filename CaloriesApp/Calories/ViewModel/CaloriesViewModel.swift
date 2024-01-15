@@ -68,7 +68,6 @@ class CaloriesViewModel: ObservableObject {
     
     func addCalories(calorie: Int) {
         self.calories += calorie
-//        self.calForView = calorie
         self.setData(number: self.calories)
     }
     

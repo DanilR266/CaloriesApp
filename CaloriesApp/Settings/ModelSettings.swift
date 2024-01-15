@@ -7,14 +7,15 @@
 
 import FirebaseFirestore
 import Firebase
+import SwiftUI
 
 class ModelSettings {
-    
+    @Environment(\.refresh) private var refresh
     private let db = Firestore.firestore()
-    
+    @AppStorage("auth") var authenticated = true
     func getStoredData(docId: String, completion: @escaping (String?, String?, Int?) -> Void) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         
         docRef.getDocument { (document, error) in
             if let error = error {
@@ -40,7 +41,7 @@ class ModelSettings {
 
     func setData(calories: Int, name: String, weight: String, docId: String) {
         let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
+        db.collection("Main").document("\(docId)").updateData([
             "GoalCalories": calories,
             "firstname": name,
             "WeightGoal": weight
@@ -52,12 +53,15 @@ class ModelSettings {
             }
         }
     }
-    func signOut(authenticated: inout Bool) {
+    
+    
+    func signOut() {
         let firebaseAuth = Auth.auth()
         do {
           try
             firebaseAuth.signOut()
-            authenticated.toggle()
+            self.authenticated.toggle()
+            print("Sign Out")
         } catch let signOutError as NSError {
           print("Error signing out: %@", signOutError)
         }

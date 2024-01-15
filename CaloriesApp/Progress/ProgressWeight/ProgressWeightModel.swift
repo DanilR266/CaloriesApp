@@ -14,7 +14,7 @@ class ProgressWeightModel {
 
     func getStoredData(docId: String, completion: @escaping ([String:String]) -> Void) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         docRef.getDocument { (document, error) in
             if let error = error {
                 print("Error getting document: \(error)")

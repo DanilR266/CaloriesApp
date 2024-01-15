@@ -85,13 +85,13 @@ class WeightViewModel: ObservableObject {
         let db = Firestore.firestore()
         if self.weightMax < self.weightStore {
             self.weightMax = self.weightStore
-            db.collection("usersNew").document("\(docId)").updateData([
+            db.collection("Main").document("\(docId)").updateData([
                 "Max": self.weightStore
             ])
         }
         if self.weightMin > self.weightStore {
             self.weightMin = self.weightStore
-            db.collection("usersNew").document("\(docId)").updateData([
+            db.collection("Main").document("\(docId)").updateData([
                 "Min": self.weightStore
             ])
         }
@@ -100,7 +100,7 @@ class WeightViewModel: ObservableObject {
     func setData(str: String) {
         setMinMax()
         let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
+        db.collection("Main").document("\(docId)").updateData([
             "WeightNow": weightStore,
             "WeightGoal": weightGoal
         ]) { err in
@@ -110,12 +110,12 @@ class WeightViewModel: ObservableObject {
                 print("Document successfully written!")
             }
         }
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if var weightDate = document.data()?["WeightDate"] as? [String:String] {
                     weightDate[self.dateToString(date: Date())] = self.weightStore
-                    db.collection("usersNew").document("\(self.docId)").updateData([
+                    db.collection("Main").document("\(self.docId)").updateData([
                         "WeightDate": weightDate
                     ])
                 }

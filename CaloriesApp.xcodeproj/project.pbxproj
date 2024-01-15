@@ -12,7 +12,6 @@
 		7E39BBC02A4D900D00E017ED /* CaloriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBBF2A4D900D00E017ED /* CaloriesView.swift */; };
 		7E39BBC22A4D902100E017ED /* CaloriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC12A4D902100E017ED /* CaloriesViewModel.swift */; };
 		7E39BBC42A4D902A00E017ED /* CaloriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC32A4D902A00E017ED /* CaloriesModel.swift */; };
-		7E39BBC62A50630F00E017ED /* CaloriesFrontSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC52A50630F00E017ED /* CaloriesFrontSide.swift */; };
 		7E39BBC82A50631800E017ED /* CaloriesBackSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39BBC72A50631800E017ED /* CaloriesBackSide.swift */; };
 		7E45C1CB2AA4B9F400E011E7 /* ProgressWeightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45C1CA2AA4B9F400E011E7 /* ProgressWeightModel.swift */; };
 		7E4BD96C2A6E3C5000AB045E /* CaloriesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BD96B2A6E3C5000AB045E /* CaloriesAppTests.swift */; };
@@ -37,6 +36,7 @@
 		7E704C182A56AD9B009F37AC /* SettingsProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E704C172A56AD9B009F37AC /* SettingsProfile.swift */; };
 		7E704C1A2A56AE8B009F37AC /* ModelSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E704C192A56AE8B009F37AC /* ModelSettings.swift */; };
 		7E72CE162AAA2E7E0063155D /* CaloriesAddYour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72CE152AAA2E7E0063155D /* CaloriesAddYour.swift */; };
+		7E7EF3412B4FD5FE00CA1EDD /* Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EF3402B4FD5FE00CA1EDD /* Delete.swift */; };
 		7E801A9A29F958BD00AAB764 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 7E801A9929F958BD00AAB764 /* SlidingTabView */; };
 		7E961BD22AA87AAB006B1316 /* CURL Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E961BD12AA87AAB006B1316 /* CURL Request.swift */; };
 		7E961BD42AA88D21006B1316 /* StructRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E961BD32AA88D21006B1316 /* StructRequest.swift */; };
@@ -80,7 +80,6 @@
 		7E39BBBF2A4D900D00E017ED /* CaloriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesView.swift; sourceTree = "<group>"; };
 		7E39BBC12A4D902100E017ED /* CaloriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesViewModel.swift; sourceTree = "<group>"; };
 		7E39BBC32A4D902A00E017ED /* CaloriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesModel.swift; sourceTree = "<group>"; };
-		7E39BBC52A50630F00E017ED /* CaloriesFrontSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesFrontSide.swift; sourceTree = "<group>"; };
 		7E39BBC72A50631800E017ED /* CaloriesBackSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesBackSide.swift; sourceTree = "<group>"; };
 		7E45C1CA2AA4B9F400E011E7 /* ProgressWeightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWeightModel.swift; sourceTree = "<group>"; };
 		7E4BD9692A6E3C5000AB045E /* CaloriesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaloriesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +101,7 @@
 		7E704C172A56AD9B009F37AC /* SettingsProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfile.swift; sourceTree = "<group>"; };
 		7E704C192A56AE8B009F37AC /* ModelSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSettings.swift; sourceTree = "<group>"; };
 		7E72CE152AAA2E7E0063155D /* CaloriesAddYour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesAddYour.swift; sourceTree = "<group>"; };
+		7E7EF3402B4FD5FE00CA1EDD /* Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delete.swift; sourceTree = "<group>"; };
 		7E961BD12AA87AAB006B1316 /* CURL Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CURL Request.swift"; sourceTree = "<group>"; };
 		7E961BD32AA88D21006B1316 /* StructRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructRequest.swift; sourceTree = "<group>"; };
 		7E961BD52AA88D56006B1316 /* RequestFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFood.swift; sourceTree = "<group>"; };
@@ -288,6 +288,7 @@
 				7EB436E72A30EEF10052AA01 /* SubViews */,
 				7E649CB82AADE81300291F17 /* Extensions */,
 				7E649CB92AAF3B6200291F17 /* SwiftUIView.swift */,
+				7E7EF3402B4FD5FE00CA1EDD /* Delete.swift */,
 			);
 			path = CaloriesApp;
 			sourceTree = "<group>";
@@ -405,7 +406,6 @@
 			children = (
 				7E39BBBF2A4D900D00E017ED /* CaloriesView.swift */,
 				7EDBD3792A65941100A8AF23 /* CaloriesSettingsView.swift */,
-				7E39BBC52A50630F00E017ED /* CaloriesFrontSide.swift */,
 				7E39BBC72A50631800E017ED /* CaloriesBackSide.swift */,
 				7E961BD72AA89E99006B1316 /* CaloriesAddView.swift */,
 				7E72CE152AAA2E7E0063155D /* CaloriesAddYour.swift */,
@@ -594,9 +594,9 @@
 				7E39BBC82A50631800E017ED /* CaloriesBackSide.swift in Sources */,
 				7ED2C57F2A776F8100186473 /* SettingsViewModel.swift in Sources */,
 				7EE229322A55492F00C554CE /* Color+Extension.swift in Sources */,
-				7E39BBC62A50630F00E017ED /* CaloriesFrontSide.swift in Sources */,
 				7EC1634F2A75841000914BFA /* CheckNewDay.swift in Sources */,
 				7E961BD82AA89E99006B1316 /* CaloriesAddView.swift in Sources */,
+				7E7EF3412B4FD5FE00CA1EDD /* Delete.swift in Sources */,
 				7E68D0AF29F1BDEE00D0EE02 /* CaloriesAppApp.swift in Sources */,
 				7E702DCF29F3BE92005FD4AB /* AuthView.swift in Sources */,
 				7ED2C57C2A76265D00186473 /* ProgressModel.swift in Sources */,
@@ -802,7 +802,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -835,7 +835,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

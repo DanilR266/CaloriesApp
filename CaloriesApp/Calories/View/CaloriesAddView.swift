@@ -30,16 +30,19 @@ struct TabViewCaloriesAdd: View {
 }
 
 struct CaloriesAddView: View {
+    @ObservedObject private var keyboardResponder = KeyboardResponder()
     @State private var redSize: CGSize = .zero
     @State private var yellowSize: CGSize = .zero
     @ObservedObject var viewModel: CaloriesViewModel
     @State var textFood: String = ""
     @State var sizeFood: String = "100"
+    @State var fieldWeightActive = false
+    @State var fieldFoodActive = false
 //    @State var buttonTap: Bool = false
     var size = Size()
     var body: some View {
         ZStack {
-            Color.backgroundColor.ignoresSafeArea()
+            Color.backgroundColor.ignoresSafeArea(edges: .top)
             VStack {
                 Text("\(viewModel.nameFood)")
                     .font(.system(size: 32, weight: .bold))
@@ -53,13 +56,26 @@ struct CaloriesAddView: View {
                         .cornerRadius(24)
                         .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
                     VStack {
-                        RectangleNutrients(viewModel: viewModel, size: size)
+                        if !(fieldFoodActive || fieldWeightActive) {
+                            RectangleNutrients(viewModel: viewModel, size: size)
+                        }
                         ZStack(alignment: .leading) {
                             Image(systemName: "magnifyingglass")
                                 .padding(.leading, 13)
                             TextField("Например: сыр", text: $textFood)
                                 .padding(.leading, 43)
                                 .font(.system(size: 24, weight: .regular))
+                                .onSubmit {
+                                    withAnimation {
+                                        self.fieldFoodActive = false
+                                        self.fieldWeightActive = false
+                                    }
+                                }
+                                .onTapGesture {
+                                    withAnimation {
+                                        self.fieldFoodActive = true
+                                    }
+                                }
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
@@ -77,6 +93,17 @@ struct CaloriesAddView: View {
                             TextField("Например: 100 г", text: $sizeFood)
                                 .padding(.leading, 43)
                                 .font(.system(size: 24, weight: .regular))
+                                .onSubmit {
+                                    withAnimation {
+                                        self.fieldFoodActive = false
+                                        self.fieldWeightActive = false
+                                    }
+                                }
+                                .onTapGesture {
+                                    withAnimation {
+                                        self.fieldWeightActive = true
+                                    }
+                                }
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
@@ -88,61 +115,84 @@ struct CaloriesAddView: View {
                         }
                         .frame(width: size.scaleWidth(339), height: size.scaleHeight(41))
                         VStack(spacing: 12) {
-                            Button {
-                                viewModel.getNutrients(texts: [textFood], size: sizeFood)
-                            } label: {
-                                ZStack {
-                                    Rectangle()
-                                        .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
-                                        .cornerRadius(25)
-                                        .foregroundColor(.backgroundColor)
-                                        .shadow(radius: 3, y: 4)
-                                    Text("Рассчитать")
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 20, weight: .bold))
+                            if !(fieldFoodActive || fieldWeightActive) {
+                                Button {
+                                    viewModel.getNutrients(texts: [textFood], size: sizeFood)
+                                } label: {
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                            .cornerRadius(25)
+                                            .foregroundColor(.backgroundColor)
+                                            .shadow(radius: 3, y: 4)
+                                        Text("Рассчитать")
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20, weight: .bold))
+                                    }
+                                }
+                                Button {
+                                    if viewModel.nameFood != "Блюдо" {
+                                        viewModel.setFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
+                                        viewModel.addCalories(calorie: Int(viewModel.ccal) ?? 0)
+                                    }
+                                } label: {
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                            .cornerRadius(25)
+                                            .foregroundColor(.backgroundColor)
+                                            .shadow(radius: 3, y: 4)
+                                        Text("Добавить")
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20, weight: .bold))
+                                    }
+                                }
+                                Button {
+                                    if viewModel.nameFood != "Блюдо" {
+                                        viewModel.setMyFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
+                                    }
+                                } label: {
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                            .cornerRadius(25)
+                                            .foregroundColor(.backgroundColor)
+                                            .shadow(radius: 3, y: 4)
+                                        Text("В избранное")
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20, weight: .bold))
+                                    }
                                 }
                             }
-                            Button {
-                                if viewModel.nameFood != "Блюдо" {
-                                    viewModel.setFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
-                                    viewModel.addCalories(calorie: Int(viewModel.ccal) ?? 0)
-                                }
-                            } label: {
-                                ZStack {
-                                    Rectangle()
-                                        .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
-                                        .cornerRadius(25)
-                                        .foregroundColor(.backgroundColor)
-                                        .shadow(radius: 3, y: 4)
-                                    Text("Добавить")
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 20, weight: .bold))
-                                }
+                            else {
+                                Button {
+                                    keyboardResponder.hideKeyboard()
+                                    withAnimation {
+                                        self.fieldFoodActive = false
+                                        self.fieldWeightActive = false
+                                    }
+                                } label: {
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
+                                            .cornerRadius(25)
+                                            .foregroundColor(.backgroundColor)
+                                            .shadow(radius: 3, y: 4)
+                                        Text("ОК")
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20, weight: .bold))
+                                    }
+                                }.padding(.top, size.scaleHeight(10))
                             }
-                            Button {
-                                if viewModel.nameFood != "Блюдо" {
-                                    viewModel.setMyFood(food: [viewModel.nameFood, sizeFood, viewModel.ccal])
-                                }
-                            } label: {
-                                ZStack {
-                                    Rectangle()
-                                        .frame(width: size.scaleWidth(313), height: size.scaleHeight(49))
-                                        .cornerRadius(25)
-                                        .foregroundColor(.backgroundColor)
-                                        .shadow(radius: 3, y: 4)
-                                    Text("В избранное")
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 20, weight: .bold))
-                                }
-                            }
-                        }.padding(.top, 35)
+                        }.padding(.top, size.scaleHeight(35))
                         Spacer()
-                    }
+                    }.padding(.top, (fieldFoodActive || fieldWeightActive) ? size.scaleHeight(50) : 0)
                 }
-            }.padding(.top, 300)
+            }.padding(.top, size.scaleHeight(250))
         }.ignoresSafeArea()
     }
 }

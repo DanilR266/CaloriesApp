@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthView: View {
-    @ObservedObject private var keyboardResponder = KeyboardResponder()
+//    @ObservedObject private var keyboardResponder = KeyboardResponder()
     @ObservedObject var viewModel: Authentication
     @State var offsetX: CGFloat = 500
     @State var offsetRegistration: CGFloat = 0
@@ -23,7 +23,7 @@ struct AuthView: View {
                     .frame(width: 212, height: 83)
                     .animation(.spring(), value: viewModel.regBool)
                     .padding(.bottom, 100)
-                    .opacity(keyboardResponder.keyboardIsShowing ? 0 : 1)
+//                    .opacity(keyboardResponder.keyboardIsShowing ? 0 : 1)
                 VStack(spacing: 15) {
                     VStack(alignment: .leading, spacing: 13) {
                         ZStack(alignment: .center) {
@@ -90,10 +90,9 @@ struct AuthView: View {
                             Button {
                                 DispatchQueue.main.async {
                                     viewModel.registration(email: viewModel.userEmail, password: viewModel.userPassword, name: viewModel.userName)
-                                    viewModel.updateDataReg()
+//                                    viewModel.updateDataReg()
                                     viewModel.userName = ""
                                 }
-
                                 viewModel.regBool = false
                             } label: {
                                 ZStack {

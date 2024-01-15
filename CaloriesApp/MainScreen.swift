@@ -50,37 +50,40 @@ struct MainScreen: View {
     @StateObject var authModel: Authentication
     
     var body: some View {
-        TabView(selection: $selected) {
-            SettingsMain()
-                .tag(0)
-                .tabItem {
-                    Text("Настройки")
-                }
-            MainView(authModel: authModel)
-                .onAppear { authModel.getStoredData() }
-                .tag(1)
-                .tabItem {
-                    Text("Главная")
-                }
-            ProgressView()
-                .tag(2)
-                .tabItem {
-                    Text("Прогресс")
-                }
-        }.tabViewStyle(.automatic)
+        MainView(authModel: authModel)
+            .onAppear { authModel.getStoredData() }
+//        TabView(selection: $selected) {
+//            SettingsMain()
+//                .tag(0)
+//                .tabItem {
+//                    Text("Настройки")
+//                }
+//            MainView(authModel: authModel)
+//                .onAppear { authModel.getStoredData() }
+//                .tag(1)
+//                .tabItem {
+//                    Text("Главная")
+//                }
+//            ProgressView()
+//                .tag(2)
+//                .tabItem {
+//                    Text("Прогресс")
+//                }
+//        }.tabViewStyle(.page)
     }
 }
 
 
 struct MainView: View {
     var size = Size()
+    @State private var selection: String? = nil
     @StateObject var authModel: Authentication
     var body: some View {
         NavigationView {
             ZStack(alignment: .topLeading) {
                 ZStack {
                     Color.backgroundColor.edgesIgnoringSafeArea(.top)
-                    VStack(spacing: 100) {
+                    VStack {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("Приветсвую,")
@@ -100,7 +103,29 @@ struct MainView: View {
                                     Circle()
                                         .stroke(Color.black, lineWidth: 2)
                                 )
-                        }.padding(.trailing, 40).padding(.leading, 40)
+                        }.padding(.trailing, 40).padding(.leading, 40).padding(.bottom, 40)
+                        HStack(spacing: 30) {
+                            Spacer()
+                            NavigationLink {
+                                SettingsMain()
+                            } label: {
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.white)
+                                    .frame(width: size.scaleWidth(30), height: size.scaleHeight(30))
+                            }
+                            
+                            NavigationLink {
+                                ProgressView()
+                            } label: {
+                                Image(systemName: "chart.bar.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.white)
+                                    .frame(width: size.scaleWidth(30), height: size.scaleHeight(30))
+                            }
+                        }.padding(.bottom, 30).padding(.trailing, 24)
                         ZStack(alignment: .top) {
                             Rectangle()
                                 .foregroundColor(.clear)
@@ -118,13 +143,17 @@ struct MainView: View {
                                     ButtonMainScreen(text: "Измерения тела", size: size)
                                 }
                                 NavigationLink {
-                                    MainCalories()
+                                    MainCalories().navigationBarBackButtonHidden(false)
                                 } label: {
                                     ButtonMainScreen(text: "Калории", size: size)
                                 }
-                                ButtonMainScreen(text: "Вода", size: size)
-                                Button {
-//                                    authModel.signOut()
+                                NavigationLink {
+//                                    WaterView()
+                                } label: {
+                                    ButtonMainScreen(text: "Вода", size: size)
+                                }
+                                NavigationLink {
+                                    
                                 } label: {
                                     ButtonMainScreen(text: "Тренировки", size: size)
                                 }

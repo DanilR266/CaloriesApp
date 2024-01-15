@@ -14,7 +14,7 @@ class ModelCalories: ObservableObject {
     
     func getStoredData(docId: String, completion: @escaping (Int?, Int?, Error?) -> Void) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         
         docRef.getDocument { (document, error) in
             if let error = error {
@@ -35,7 +35,7 @@ class ModelCalories: ObservableObject {
     }
     func setData(number: Int, docId: String) {
         let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
+        db.collection("Main").document("\(docId)").updateData([
             "CaloriesNow": number
         ]) { err in
             if let err = err {
@@ -44,13 +44,13 @@ class ModelCalories: ObservableObject {
                 print("Document successfully written!")
             }
         }
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         let dateToday = dateToString()
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if var caloriesDate = document.data()?["CaloriesDate"] as? [String:String] {
                     caloriesDate[dateToday] = String(number)
-                    db.collection("usersNew").document("\(docId)").updateData([
+                    db.collection("Main").document("\(docId)").updateData([
                         "CaloriesDate": caloriesDate
                     ])
                 }
@@ -60,14 +60,14 @@ class ModelCalories: ObservableObject {
     
     func setFood(docId: String, food: Array<String>) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         let dateToday = dateToString()
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if var foodArray = document.data()?["FoodDate"] as? [String:[String]] {
                     if foodArray[dateToday] == nil { foodArray[dateToday] = [] }
                     foodArray[dateToday]?.append(contentsOf: food)
-                    db.collection("usersNew").document("\(docId)").updateData([
+                    db.collection("Main").document("\(docId)").updateData([
                         "FoodDate": foodArray
                     ])
                 }
@@ -76,12 +76,12 @@ class ModelCalories: ObservableObject {
     }
     func setMyFood(docId: String, food: Array<String>) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if var foodArray = document.data()?["SavedFood"] as? [String] {
                     foodArray.append(contentsOf: food)
-                    db.collection("usersNew").document("\(docId)").updateData([
+                    db.collection("Main").document("\(docId)").updateData([
                         "SavedFood": foodArray
                     ])
                 }
@@ -91,14 +91,14 @@ class ModelCalories: ObservableObject {
     
     func cleanMyFood(docId: String) {
         let db = Firestore.firestore()
-        db.collection("usersNew").document("\(docId)").updateData([
+        db.collection("Main").document("\(docId)").updateData([
             "SavedFood": []
         ])
     }
     
     func getMyFood(docId: String, completion: @escaping ([String]?, Error?) -> Void) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         
         docRef.getDocument { (document, error) in
             if let error = error {
@@ -120,13 +120,13 @@ class ModelCalories: ObservableObject {
     
     func testDate(docId: String, num: Int) {
         let db = Firestore.firestore()
-        let docRef = db.collection("usersNew").document(docId)
+        let docRef = db.collection("Main").document(docId)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if var foodArray = document.data()?["FoodDate"] as? [String:[String]] {
                     foodArray["29.11.2023"]? = ["1", "2", "3"]
                     foodArray["21.11.25"] = ["1", "2", "\(num)"]
-                    db.collection("usersNew").document("\(docId)").updateData([
+                    db.collection("Main").document("\(docId)").updateData([
                         "FoodDate": foodArray
                     ])
                 }

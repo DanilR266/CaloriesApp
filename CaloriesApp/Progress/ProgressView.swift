@@ -56,7 +56,7 @@ struct ProgressView: View {
                 
                 Button {
                     withAnimation {
-                        selectedView = SelectedView.waterView.rawValue
+//                        selectedView = SelectedView.waterView.rawValue
                     }
                 } label: {
                     ZStack(alignment: .center) {
